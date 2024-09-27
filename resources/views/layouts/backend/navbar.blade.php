@@ -4,7 +4,7 @@
                     </div>
                     <ul class="main-menu">
                         <!-- Start::slide__category -->
-                        <li class="slide__category"><span class="category-name">Main</span></li>
+                        <li class="slide__category"><span class="category-name">Menu Utama</span></li>
                         <!-- End::slide__category -->
 
                         <!-- Start::slide -->
