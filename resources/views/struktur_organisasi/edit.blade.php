@@ -18,28 +18,32 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('struktur_organisasi.store') }}" method="POST">
-                            @csrf
-                            <div class="form-group mb-3">
-                                <label for="nik">NIK Pegawai:</label>
-                                <select name="nik" id="nik" class="form-control">
-                                <option value="">-- Select Pegawai --</option>
-                                    @foreach ($pegawai2 as $p2)
-                                        <option value="{{ $p2->nik }}">{{ $p2->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="nik_atasan_langsung">NIK Atasan Langsung:</label>
-                                <select name="nik_atasan_langsung" id="nik_atasan_langsung" class="form-control">
-                                <option value="">-- Select Pegawai --</option>
-                                    @foreach ($pegawai as $p)
-                                        <option value="{{ $p->nik }}">{{ $p->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </form>
+                    <form action="{{ route('struktur_organisasi.update', $struktur->id_struktur_organisasi) }}" method="POST">
+        @csrf
+        @method('PUT') <!-- Tambahkan method PUT untuk mengupdate data -->
+        
+        <div class="form-group mb-3">
+            <label for="nik">NIK Pegawai:</label>
+            <select name="nik" id="nik" class="form-control" required>
+                <option value="">-- Pilih Pegawai --</option>
+                @foreach ($pegawai2 as $p2)
+                    <option value="{{ $p2->nik }}" {{ $p2->nik == $struktur->nik ? 'selected' : '' }}>{{ $p2->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="nik_atasan_langsung">NIK Atasan Langsung:</label>
+            <select name="nik_atasan_langsung" id="nik_atasan_langsung" class="form-control" required>
+                <option value="">-- Pilih Pegawai --</option>
+                @foreach ($pegawai as $p)
+                    <option value="{{ $p->nik }}" {{ $p->nik == $struktur->nik_atasan_langsung ? 'selected' : '' }}>{{ $p->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
                     </div>
                 </div>
             </div>

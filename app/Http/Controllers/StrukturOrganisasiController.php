@@ -11,10 +11,29 @@ class StrukturOrganisasiController extends Controller
     public function index()
     {
         $title = 'Struktur Organisasi';
-        $strukturOrganisasi = StrukturOrganisasi::with(['pegawai', 'atasan'])->get();
-        return view('struktur_organisasi.index', compact('strukturOrganisasi', 'title'));
-    }
+        $struktur = StrukturOrganisasi::with('pegawai', 'atasan')->get();
 
+        // Menyusun data ke dalam format hierarkis
+        $hierarchy = $this->buildHierarchy($struktur);
+
+        return view('struktur_organisasi.index', compact('hierarchy', 'title'));
+    }
+    private function buildHierarchy($items, $parentId = null)
+    {
+        $branch = [];
+
+        foreach ($items as $item) {
+            if ($item->nik_atasan_langsung == $parentId) {
+                $children = $this->buildHierarchy($items, $item->nik);
+                if ($children) {
+                    $item->children = $children;
+                }
+                $branch[] = $item;
+            }
+        }
+
+        return $branch;
+    }
     public function create()
     {
         $title = 'Create Struktur Organisasi';
@@ -37,10 +56,11 @@ class StrukturOrganisasiController extends Controller
 
     public function edit($id)
     {
+        $title = 'Edit Struktur Organisasi';
         $struktur = StrukturOrganisasi::findOrFail($id);
         $pegawai = Pegawai::where('stts_aktif', 'AKTIF')->get();
         $pegawai2 = Pegawai::where('stts_aktif', 'AKTIF')->get();
-        return view('struktur_organisasi.edit', compact('struktur', 'pegawai'));
+        return view('struktur_organisasi.edit', compact('struktur', 'pegawai','pegawai2','title'));
     }
     
     public function update(Request $request, $id)
@@ -58,46 +78,10 @@ class StrukturOrganisasiController extends Controller
 
     public function destroy($id)
     {
-        $struktur = StrukturOrganisasi::findOrFail($id);
+         // Hapus data dari database
+        $struktur = StrukturOrganisasi::find($id);
         $struktur->delete();
-
-        return redirect()->route('struktur_organisasi.index')->with('success', 'Data Struktur Organisasi berhasil dihapus.');
-    }
-
-    public function getTreeData()
-    {
-        try {
-            // Ambil data struktur organisasi
-            $strukturOrganisasi = StrukturOrganisasi::all();
-            \Log::info($strukturOrganisasi); // Debug log
-    
-            // Format data untuk jsTree
-            $data = $this->formatTreeData($strukturOrganisasi);
+        return redirect()->route('struktur_organisasi.index')->with('success', 'Sifat Surat deleted successfully.');
         
-            return response()->json($data);
-        } catch (\Exception $e) {
-            \Log::error('Error fetching tree data: ' . $e->getMessage());
-            return response()->json(['error' => 'Error fetching tree data'], 500);
-        }
-    }
-    public function show($id)
-{
-    $struktur = StrukturOrganisasi::findOrFail($id);
-    return view('struktur_organisasi.show', compact('struktur'));
-}
-
-    private function formatTreeData($strukturOrganisasi)
-    {
-        $result = [];
-        foreach ($strukturOrganisasi as $struktur) {
-            $children = StrukturOrganisasi::where('nik_atasan_langsung', $struktur->nik)->get();
-            $node = [
-                'id' => $struktur->nik,
-                'text' => 'NIK: ' . $struktur->nik,
-                'children' => $this->formatTreeData($children)
-            ];
-            $result[] = $node;
-        }
-        return $result;
     }
 }
