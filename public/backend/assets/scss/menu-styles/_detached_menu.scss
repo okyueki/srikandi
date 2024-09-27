@@ -1,0 +1,195 @@
+/* Start:: detached_menu */
+[data-vertical-style="detached"] {
+    @media (min-width: 992px) {
+        .page {
+            width: 95%;
+            margin: 0 auto;
+            padding-inline-start: 1.25rem;
+        }
+        .app-sidebar {
+            inset-block-start: calc(64px + 1.5rem);
+            inset-block-end: 1.5rem;
+            inset-inline-start: inherit;
+            border: 1px solid $menu-border-color;
+            border-radius: $default-radius;
+            height: auto;
+            .main-sidebar-header {
+                display: none;
+            }
+        }
+        .main-sidebar {
+            height: 100%;
+            margin-block-start: 0;
+        }
+        .app-content {
+            margin-inline-start: 15rem;
+            position: relative;
+        }
+        &[data-page-style="classic"] {
+            .app-sidebar {
+                border: 1px solid $default-border;
+            }
+        }
+        &[data-theme-mode="light"] {
+            &[data-header-styles="dark"] {
+                .horizontal-logo {
+                    .header-logo {
+                        .desktop-logo,.toggle-logo,.desktop-white,.toggle-white {
+                            display: none;
+                        }
+                        .desktop-dark {
+                            display: block;
+                        }
+                    }
+                }
+            }
+            &[data-header-styles="color"],&[data-header-styles="gradient"] {
+                .horizontal-logo {
+                    .header-logo {
+                        .desktop-logo,.toggle-logo,.desktop-dark,.toggle-white {
+                            display: none;
+                        }
+                        .desktop-white {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        &[data-theme-mode="dark"] {
+            .horizontal-logo {
+                .header-logo {
+                    .desktop-logo,.toggle-logo,.desktop-white,.toggle-white {
+                        display: none;
+                    }
+                    .desktop-dark {
+                        display: block;
+                    }
+                }
+            }
+            &[data-header-styles="light"] {
+                .horizontal-logo {
+                    .header-logo {
+                        .desktop-dark,.toggle-logo,.desktop-white,.toggle-white {
+                            display: none;
+                        }
+                        .desktop-logo {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        &[data-toggled="detached-close"] {
+            &:not([data-icon-overlay="open"]) {
+                .app-sidebar {
+                    width: 5rem;
+                    .side-menu__label,
+                    .side-menu__angle,
+                    .category-name,
+                    .slide-menu,.side-menu__item .badge {
+                        display: none !important;
+                    }
+                    .side-menu__item {
+                        justify-content: center;
+                        .side-menu__icon {
+                            margin-inline-end: 0;    
+                        }
+                    }
+                    .main-menu {
+                        padding-block-start: 22px;
+                    }
+                    .slide__category {
+                        display: none;
+                    }
+                }
+            }
+            .app-content {
+                margin-inline-start: 5rem;
+                position: relative;
+            }
+            &[data-icon-overlay="open"] {
+                .app-sidebar {
+                    width: 15rem;
+                    .main-sidebar-header {
+                        width: 15rem;
+                        .header-logo {
+                            .desktop-logo {
+                                display: block !important;
+                            }
+                            .desktop-dark,
+                            .toggle-logo {
+                                display: none !important;
+                            }
+                        }
+                    }
+                    .side-menu__item {
+                        justify-content: flex-start;
+                    }
+                    .side-menu__icon {
+                        margin-inline-end: 0.625rem;
+                    }
+                    .slide__category {
+                        padding: 0.75rem 1.65rem;
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        &[data-menu-styles="transparent"] {
+            .app-sidebar {
+                border: 1px solid $default-border;
+            }
+        }
+        .app-header {
+            padding-inline-start: 0;
+            .main-header-container {
+                width: 94%;
+            }
+            .horizontal-logo {
+                padding: 0.85rem 0;
+                display: block;
+                img {
+                    height: 2rem;
+                    line-height: 2rem;
+                }
+                .desktop-logo {
+                    display: block;
+                }
+                .desktop-dark,.toggle-logo,.desktop-white,.toggle-white {
+                    display: none;
+                }
+            }
+        }
+        &[data-theme-mode="dark"] {
+            .app-header {
+                .horizontal-logo {
+                    .desktop-white {
+                        display: block;
+                    }
+                    .desktop-dark,.toggle-logo,.desktop-logo,.toggle-white {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .footer {
+            box-shadow: none;
+            background-color: transparent !important;
+        }
+        &[data-menu-position="scrollable"] {
+            .app-sidebar {
+                z-index: 99;
+            }
+        }
+        &[data-bg-img="bgimg1"], &[data-bg-img="bgimg2"], &[data-bg-img="bgimg3"], &[data-bg-img="bgimg4"], &[data-bg-img="bgimg5"] {
+            .app-sidebar {
+                border: 0 !important;
+            }
+        }
+    }
+}
+
+/* End:: detached_menu */

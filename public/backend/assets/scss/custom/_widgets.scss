@@ -1,0 +1,370 @@
+/*Start:: widgets*/
+
+/*Start:: Ratings table*/
+.rating-table {
+    &.table {
+        th, td {
+            padding: 7px 6px !important;
+            line-height: 1.462;
+        }
+    }
+}
+/*End:: Ratings table*/
+
+/*Start:: wrapper*/
+.wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+/*End:: wrapper*/
+
+/*Start:: order-list*/
+.order-list {
+    .list .list-item {
+        display: flex;
+        align-items: center;
+        padding-block-end: 22px;
+    }
+}
+/*End:: order-list*/
+
+/*Start:: browser-stats*/
+.browser-stats {
+    .wd-30 {
+        width: 30px;
+    }
+    .ht-30 {
+        height: 30px;
+    }
+    .item {
+        padding: 11px 1rem;
+    }
+    .sub-text {
+        display: block;
+        color: #949eb7;
+        font-size: 10.6px;
+    }
+}
+/*End:: browser-stats*/
+
+/*Start:: widget-user */
+.widget-user {
+    .widget-user-header {
+        padding: 20px;
+        height: 120px;
+    }
+    .widget-user-username {
+        margin-block-start: 0;
+        margin-block-end: 5px;
+        font-size: 25px;
+        font-weight: 300;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        color: $white;
+    }
+    .widget-user-image {
+        position: absolute;
+        inset-block-start: 65px;
+        inset-inline-start: 50%;
+        margin-inline-start: -45px;
+        img {
+            width: 90px;
+            height: auto;
+            border: 3px solid $custom-white;
+        }
+    }
+    .user-wideget-footer {
+        padding-block-start: 30px;
+    }
+}
+.user-wideget-footer {
+    padding: 10px;
+}
+.user-wideget {
+    overflow: hidden;
+    .description-block {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+        .description-header {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .description-text {
+            text-transform: uppercase;
+            color: $text-muted;
+        }
+    }
+}
+/*End:: widget-user */
+
+/*Start:: Chip */
+.chip {
+    .avatar {
+        margin-block: 0;
+        margin-inline-end: 0.5rem;
+        margin-inline-start: -0.75rem;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 50%;
+    }
+}
+.chips .chip {
+    margin-block-start: 0;
+    margin-block-end: 0.5rem;
+    margin-inline-end: 0.5rem;
+    margin-inline-start: 0;
+}
+.chip {
+    display: inline-flex;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6e7687;
+    padding: 0 0.75rem;
+    border-radius: 1rem;
+    background-color: $default-background;
+    transition: 0.3s background;
+}
+/*End:: Chip */
+
+/*Start:: Card-chart */
+.card-chart {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block-end: 10px;
+    margin-block-start: 3px;
+}
+/*End:: Card-chart */
+
+/*Start:: latest-tasks */
+.latest-tasks {
+    .nav-tabs .nav-link {
+        padding: 10px 1.25rem;
+        line-height: 1.428;
+        font-size: 0.875rem;
+    }
+    .nav-item .nav-link.active {
+        background: transparent;
+    }
+    .tasks {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        margin-block-end: 1.15rem;
+        .span {
+            margin-inline-start: 1.3rem;
+            font-weight: 500;
+        }
+    }
+    .time {
+        margin-inline-start: 1.3rem;
+        font-size: 13px;
+        color: #737f9e;
+    }
+    .task-line {
+        &:before {
+            position: absolute;
+            display: block;
+            width: 0.2rem;
+            top: 0.2rem;
+            content: "";
+            border-radius: 0.2rem;
+            height: 2rem;
+        }
+        &.primary:before {
+            background: $primary;
+        }
+        &.pink:before {
+            background: $pink;
+        }
+        &.success:before {
+            background: $success;
+        }
+        &.warning:before {
+            background: $warning;
+        }
+        &.teal:before {
+            background: $teal;
+        }
+        &.danger:before {
+            background: $danger;
+        }
+        &.purple:before {
+            background: $purple;
+        }
+        &.info:before {
+            background: $info;
+        }
+    }
+} 
+/*End:: latest-tasks */
+
+/*Start::feature */
+.feature .project {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    line-height: 2em;
+    vertical-align: middle;
+    padding-block-start: 0px;
+    color: $white;
+    font-size: 20px;
+    border-radius: 50px;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    justify-content: center;
+    font-weight: 500;
+}
+/*End::feature */
+
+/*Start::rating-scroll */
+.rating-scroll {
+    max-height: 375px;
+    position: relative;
+    overflow: hidden scroll;
+}
+/*End::rating-scroll */
+
+/*Start::media */
+.media {
+    display: flex;
+    align-items: center;
+}
+/*End::media */
+
+/*Start::Sales-session */
+.sales-session {
+    li {
+        list-style-type: none;
+        margin-block-end: 1.2rem;
+    }
+}
+/*End::Sales-session */
+
+.team i {
+    margin-inline-start: 10px;
+}
+/*Start:: Widget-notification*/
+
+/*Start:: Success widget*/
+.success-widget {
+    h4 {
+        text-align: center;
+        &:before {
+            inset-inline-end: 0.5em;
+            content: "";
+            position: relative;
+            display: inline-block;
+            width: 26%;
+            height: 1px;
+            vertical-align: middle;
+            background: #ccead1;
+        }
+        &:after {
+            content: "";
+            position: relative;
+            display: inline-block;
+            width: 26%;
+            height: 1px;
+            vertical-align: middle;
+            background: #ccead1;
+            inset-inline-start: 0.5em;
+        }
+    }
+}
+
+/*End:: Success widget*/
+/*Start:: Danger widget*/
+.danger-widget h4 {
+    &:before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 26%;
+        height: 1px;
+        vertical-align: middle;
+        background: #f5dce2;
+        inset-inline-end: 0.5em;
+    }
+    &:after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 26%;
+        height: 1px;
+        vertical-align: middle;
+        background: #f5dce2;
+        inset-inline-start: 0.5em;
+    }
+}
+/*End:: Danger widget*/
+/*Start:: Warning widget*/
+.warning-widget h4 {
+    &:before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 26%;
+        height: 1px;
+        vertical-align: middle;
+        background: #f3e7c6;
+        inset-inline-end: 0.5em;
+    }
+    &:after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 26%;
+        height: 1px;
+        vertical-align: middle;
+        background: #f3e7c6;
+        inset-inline-start: 0.5em;
+    }
+}
+/*End:: Warning widget*/
+
+/*Start:: main-error-wrapper*/
+.main-error-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    .btn, .sp-container button {
+        border-width: 2px;
+        font-weight: 700;
+    }
+}
+/*End:: main-error-wrapper*/
+
+/*Start:: card-header-transparent*/
+.bg-danger-transparent .card-header, 
+.bg-success-transparent .card-header, 
+.bg-info-transparent .card-header {
+    background: transparent !important;
+}
+/*End:: card-header-transparent*/
+
+/*End:: Widget-notification*/
+@media (max-width: 480px) {
+    .widget-user-header {
+        padding: 10px 20px !important;
+    }
+    .widget-user .widget-user-username {
+        font-size: 21px; 
+    }
+}
+/*End:: widgets*/

@@ -1,0 +1,291 @@
+:root {
+	--body-bg-rgb : 									236, 240, 250;
+	--primary-rgb: 										1, 98, 232;
+	--secondary-rgb :									95, 109, 136;
+	--warning-rgb :										251, 188, 11;
+	--info-rgb :										0, 185, 255;
+	--success-rgb :										34, 192, 60; 
+	--danger-rgb :										238, 51, 94;
+	--light-rgb :										240, 241, 246;
+	--dark-rgb :										59, 72, 99;
+	--orange-rgb : 										253, 126, 20;
+	--pink-rgb :                                       	241, 0, 117;
+	--teal-rgb : 										0, 204, 204;
+	--purple-rgb : 										72, 0, 201;
+	--default-body-bg-color:							rgb(var(--body-bg-rgb));		
+	--primary-color:	 								rgb(var(--primary-rgb));
+	--primary-border: 									rgb(var(--primary-rgb));
+	--primary01: 										rgba(var(--primary-rgb), 0.1);
+	--primary02: 										rgba(var(--primary-rgb), 0.2);
+	--primary03: 										rgba(var(--primary-rgb), 0.3);
+	--primary04: 										rgba(var(--primary-rgb), 0.4);
+	--primary05: 										rgba(var(--primary-rgb), 0.5);
+	--primary06: 										rgba(var(--primary-rgb), 0.6);
+	--primary07: 										rgba(var(--primary-rgb), 0.7);
+	--primary08: 										rgba(var(--primary-rgb), 0.8);
+	--primary09: 										rgba(var(--primary-rgb), 0.9);
+	--primary005: 										rgba(var(--primary-rgb), 0.05);
+	--default-font-family:    							'Roboto', sans-serif;
+	--default-font-weight:								400;
+	--default-text-color:       						#031b4e;	
+	--default-border:									#eae8f1;
+	--default-background: 								#f8fafd;
+	--menu-bg:											#fff;	
+	--menu-prime-color:									#5b6e88;
+	--menu-secondary-color:								#6d7790;
+	--icons-color:										#5b6e88;
+	--menu-category-color:								#2c364c;
+	--menu-border-color:								#eae8f1;
+	--header-bg:                                        #fff;
+	--header-prime-color:								#71829b;
+	--header-border-color:								#eae8f1;
+	--custom-white:										#fff;
+	--custom-black:										#000;
+	--custom-bg-color:									#ecf0fa;
+	--bootstrap-card-border:							#eae8f1;
+	--list-hover-focus-bg:								#ecf0fa;
+	--text-muted: 										#7987a1;
+	--input-border: 									#e9edf6;
+	--form-control-bg: 									#ffffff;
+	--card-title-color: 								#242f48;
+	--card-box-shadow: 									-8px 12px 18px 0 #dadee8;
+
+	/* Gray set */
+	--gray-1:											#ecf0fa;
+	--gray-2:											#dde2ef;
+	--gray-3:											#d0d7e8;
+	--gray-4:											#b9c2d8;
+	--gray-5:											#949eb7;
+	--gray-6:											#737f9e;
+	--gray-7:											#4d5875;
+	--gray-8:											#364261;
+	--gray-9:											#242f48;
+
+	/* White set */
+	--white-1:											rgba(255,255,255, 0.1);
+	--white-2:											rgba(255,255,255, 0.2);
+	--white-3:											rgba(255,255,255, 0.3);
+	--white-4:											rgba(255,255,255, 0.4);
+	--white-5:											rgba(255,255,255, 0.5);
+	--white-6:											rgba(255,255,255, 0.6);
+	--white-7:											rgba(255,255,255, 0.7);
+	--white-8:											rgba(255,255,255, 0.8);
+	--white-9:											rgba(255,255,255, 0.9);
+	
+	/* Black set */
+	--black-1:											rgba(0,0,0, 0.1);
+	--black-2:											rgba(0,0,0, 0.2);
+	--black-3:											rgba(0,0,0, 0.3);
+	--black-4:											rgba(0,0,0, 0.4);
+	--black-5:											rgba(0,0,0, 0.5);
+	--black-6:											rgba(0,0,0, 0.6);
+	--black-7:											rgba(0,0,0, 0.7);
+	--black-8:											rgba(0,0,0, 0.8);
+	--black-9:											rgba(0,0,0, 0.9);
+}
+
+
+/*Font Family*/
+$default-font-family:									var(--default-font-family);
+
+/*Font Size*/
+$default-font-size:										0.875rem;
+
+/*Font Weight*/
+$default-font-weight:									var(--default-font-weight);
+
+/*Body & Text colors*/
+$default-body-color: 									var(--default-body-bg-color);
+$default-text-color:									var(--default-text-color);
+
+/*Default Background Color*/
+$default-background: 									var(--default-background);
+
+/*Border Color*/
+$default-border:										var(--default-border);
+
+/*Border Radius*/
+$default-radius:										0.3rem;
+
+/*Box Shadow*/
+$box-shadow: 											0 0.125rem 0 rgba(10, 10, 10, .04);
+
+/* Card variables*/
+$card-box-shadow: 										var(--card-box-shadow);
+$card-title-color: 										var(--card-title-color);
+
+/* Header Variables */
+$header-bg:												var(--header-bg);
+$header-prime-color:									var(--header-prime-color);
+$header-border-color:									var(--header-border-color);
+
+/*icons Variables*/
+$icons-color: 											var(--icons-color);
+
+/*Menu Variables*/
+$menu-prime-color: 										var(--menu-prime-color);
+$menu-secondary-color: 									var(--menu-secondary-color);
+$menu-category-color: 									var(--menu-category-color);
+$menu-bg:												var(--menu-bg);
+$menu-border-color:										var(--menu-border-color);
+
+/*Color Variables*/
+$primary:												var(--primary-color);
+$primary-border:										var(--primary-border);
+$primary-transparent:									var(--primary-transparent-color);
+$primary-01:											var(--primary01);
+$primary-02:											var(--primary02);
+$primary-03:											var(--primary03);
+$primary-04:											var(--primary04);
+$primary-05:											var(--primary05);
+$primary-06:											var(--primary06);
+$primary-07:											var(--primary07);
+$primary-08:											var(--primary08);
+$primary-09:											var(--primary09);
+$primary-005:											var(--primary005);
+$custom-white:											var(--custom-white);
+$custom-black:											var(--custom-black);
+$custom-bg-color:										var(--custom-bg-color);
+$secondary:												rgb(var(--secondary-rgb));
+$warning:												rgb(var(--warning-rgb));
+$info:													rgb(var(--info-rgb));
+$success:												rgb(var(--success-rgb));
+$danger:												rgb(var(--danger-rgb));
+$light:													rgb(var(--light-rgb));
+$dark:													rgb(var(--dark-rgb));
+$orange:												rgb(var(--orange-rgb));
+$pink:													rgb(var(--pink-rgb));
+$purple:												rgb(var(--purple-rgb));
+$teal:													rgb(var(--teal-rgb));
+$red:                                                   #d03d46;
+$blue:													#2b3e65;
+$green:													#1dd871;
+$cyan:													#00D1D1;
+$indigo:												#4d5ddb;
+$white:													#fff;
+$gray:													#8699A3;
+$black:													#000;
+$yellow:												#ffc102;
+$text-muted:											var(--text-muted);
+$bootstrap-card-border:									var(--bootstrap-card-border);
+$list-hover-focus-bg:									var(--list-hover-focus-bg);
+$input-border: 											var(--input-border);
+$form-control-bg:										var(--form-control-bg);
+
+/* social icons colors */
+$facebook: 												#3b5998;
+$twitter: 												#00acee;
+$github:												#333;
+$google: 												#CF4E43;
+$youtube: 												#FF0000;
+
+/*gradient variables*/
+$primary-gradient:										linear-gradient(to right, $primary 0%, $primary-05 100%);
+$secondary-gradient:									linear-gradient(to right, $secondary 0%, #6789D8 100%);
+$success-gradient:										linear-gradient(to left, #48d6a8 0%, #029666 100%);
+$warning-gradient:										linear-gradient(to left, #efa65f, #f76a2d);
+$pink-gradient:											linear-gradient(to right, $pink 0%, #FFA795 100%);
+$teal-gradient:											linear-gradient(to right, $teal 0%, #0695DD 100%);
+$danger-gradient:										linear-gradient(45deg, #f93a5a, #f7778c);
+$info-gradient:											linear-gradient(to right, $info 0%, #52F0CE 100%);
+$orange-gradient:										linear-gradient(to right,$orange 0%,#9BA815 100%);
+$purple-gradient:										linear-gradient(to right, $purple 0%, #884af1 100%);
+$light-gradient:										linear-gradient(to right, $light 0%, #D1D6DE 100%);
+$dark-gradient:											linear-gradient(to right, $dark 0%, #54505D 100%);
+
+/*gray set*/
+$gray-1:												var(--gray-1);
+$gray-2:												var(--gray-2);
+$gray-3:												var(--gray-3);
+$gray-4:												var(--gray-4);
+$gray-5:												var(--gray-5);
+$gray-6:												var(--gray-6);
+$gray-7:												var(--gray-7);
+$gray-8:												var(--gray-8);
+$gray-9:												var(--gray-9);
+
+/*white set*/
+$white-1:												var(--white-1);
+$white-2:												var(--white-2);
+$white-3:												var(--white-3);
+$white-4:												var(--white-4);
+$white-5:												var(--white-5);
+$white-6:												var(--white-6);
+$white-7:												var(--white-7);
+$white-8:												var(--white-8);
+$white-9:												var(--white-9);
+
+/*black set*/
+$black-1:												var(--black-1);
+$black-2:												var(--black-2);
+$black-3:												var(--black-3);
+$black-4:												var(--black-4);
+$black-5:												var(--black-5);
+$black-6:												var(--black-6);
+$black-7:												var(--black-7);
+$black-8:												var(--black-8);
+$black-9:												var(--black-9);
+
+/* dark mode */
+[data-theme-mode="dark"] {
+	--body-bg-rgb : 									25, 32, 47;
+	--body-bg-rgb2 : 									36, 43, 57;
+	--menu-bg:										  	rgb(var(--body-bg-rgb));
+	--menu-border-color:								rgba(255,255,255,0.1);
+	--menu-prime-color: 								rgba(255,255,255,0.6);
+	--menu-secondary-color: 							rgba(255,255,255,0.6);
+	--icons-color: 										rgba(255,255,255,0.6);
+	--menu-category-color: 								rgba(255,255,255,0.6);
+	--header-bg:										rgb(var(--body-bg-rgb));	
+	--header-prime-color: 								rgba(255,255,255,0.6);
+	--header-border-color:								rgba(255,255,255,0.1);
+	--custom-white:										rgb(var(--body-bg-rgb));		
+	--custom-black:										#fff;		
+	--custom-bg-color:									rgba(255,255,255,0.05);		
+	--default-border:									rgba(255,255,255,0.1);	
+	--default-text-color:       						rgba(255,255,255,0.85);
+	--light-rgb:										33, 41, 59;	
+	--dark-rgb :										240 ,245 ,248; 	
+	--bootstrap-card-border:							rgba(255,255,255,0.1);		
+	--list-hover-focus-bg:								rgba(255,255,255,0.1);
+	--default-background:								rgba(255,255,255,0.05);
+	--default-body-bg-color:							rgb(var(--body-bg-rgb2));	
+	--text-muted: 										rgba(255,255,255,0.6);
+	--input-border: 									#2f3540;
+	--form-control-bg: 									#141a26;
+	--card-title-color: 								#ffffff;
+	--card-box-shadow: 									-8px 12px 18px 0 rgba(0, 0, 0, 0.1);
+
+	/* Gray Set */
+    --gray-1: 											#110f0f;
+    --gray-2: 											#17171c;
+    --gray-3: 											#393946;	
+    --gray-4: 											#505062;
+    --gray-5: 											#73738c;
+    --gray-6: 											#8f8fa3;
+    --gray-7: 											#ababba;
+    --gray-8: 											#c7c7d1;
+    --gray-9: 											#e3e3e8;
+
+	/* white set */
+	--white-1:											rgba(0,0,0,0.1);
+	--white-2:											rgba(0,0,0,0.2);
+	--white-3:											rgba(0,0,0,0.3);
+	--white-4:											rgba(0,0,0,0.4);
+	--white-5:											rgba(0,0,0,0.5);
+	--white-6:											rgba(0,0,0,0.6);
+	--white-7:											rgba(0,0,0,0.7);
+	--white-8:											rgba(0,0,0,0.8);
+	--white-9:											rgba(0,0,0,0.9);
+	
+	/* black set */
+	--black-1:											rgba(255,255,255,0.05);
+	--black-2:											rgba(255,255,255,0.2);
+	--black-3:											rgba(255,255,255,0.3);
+	--black-4:											rgba(255,255,255,0.4);
+	--black-5:											rgba(255,255,255,0.5);
+	--black-6:											rgba(255,255,255,0.6);
+	--black-7:											rgba(255,255,255,0.7);
+	--black-8:											rgba(255,255,255,0.8);
+	--black-9:											rgba(255,255,255,0.9);
+}
