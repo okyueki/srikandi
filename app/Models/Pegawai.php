@@ -22,17 +22,22 @@ class Pegawai extends Model
         'indek', 'mulai_kontrak', 'cuti_diambil', 'dankes', 'photo', 'no_ktp'
     ];
 
-    public function departemen_unit()
+    public function dokter()
     {
-        return $this->belongsTo(Departemen::class, 'departemen', 'dep_id');
+        return $this->hasOne(Dokter::class, 'kd_dokter', 'nik');
     }
-    public function temporarypresensi()
+
+    public function adimeGizi()
     {
-        return $this->belongsTo(TemporaryPresensi::class, 'id', 'id');
+        return $this->belongsTo(AdimeGizi::class, 'nip', 'nik');
     }
-    // Define the inverse relationship
-    public function petugas()
+
+    public function indexinsDepartemen()
     {
-        return $this->hasOne(Petugas::class, 'nip', 'nik'); // Assuming 'nip' in Petugas corresponds to 'nik' in Pegawai
+        return $this->belongsTo(Departemen::class, 'indexins', 'dep_id');
+    }
+    public function pemeriksaanRalan()
+    {
+        return $this->hasMany(PemeriksaanRalan::class, 'nip', 'nik');
     }
 }

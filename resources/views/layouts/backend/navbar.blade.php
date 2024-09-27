@@ -105,16 +105,16 @@
                                         <i class="fe fe-chevron-right side-menu__angle"></i></a>
                                     <ul class="slide-menu child2">
                                         <li class="slide">
-                                            <a href="{{ route('ijin.index'); }}" class="side-menu__item">Pengajuan Ijin</a>
+                                            <a href="{{ route('presensi.index') }}" class="side-menu__item">Temporary Presensi</a>
                                         </li>
                                         <li class="slide">
-                                            <a href="{{ route('cuti.index'); }}" class="side-menu__item">Pengajuan Cuti</a>
+                                            <a href="{{ route('absensi.show') }}" class="side-menu__item">Absensi</a>
                                         </li>
                                         
                                     </ul>
                                 </li>
                                 <li class="slide">
-                                    <a href="{{ route('pengajuan_lembur.index'); }}" class="side-menu__item">Daftar Pegawai</a>
+                                    <a href="{{ route('pegawai.index') }}" class="side-menu__item">Daftar Pegawai</a>
                                 </li>
                                 <li class="slide">
                                     <a href="{{ route('sifat_surat.index'); }}" class="side-menu__item">Dahsboard Pegawai</a>

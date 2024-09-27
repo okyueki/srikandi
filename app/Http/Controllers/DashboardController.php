@@ -3,100 +3,126 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pegawai;
+use App\Models\RegPeriksa;
+use App\Models\KamarInap;
 use App\Models\TemporaryPresensi;
+use App\Models\PemeriksaanRalan;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $title = 'Dashboard';
-          // Mengambil semua data presensi
-        $presensi = TemporaryPresensi::all();
-        return view('dashboard.index', compact('title','presensi'));
-    }
+        // Data untuk pegawai yang terlambat hari ini
+        $topTerlambat = TemporaryPresensi::with('pegawai')  // Memuat relasi dengan tabel pegawai
+            ->whereIn('status', ['Terlambat Toleransi', 'Terlambat I', 'Terlambat II'])  // Filter berdasarkan status
+            ->whereDate('jam_datang', today())  // Data untuk hari ini
+            ->orderBy(DB::raw("TIME_TO_SEC(STR_TO_DATE(keterlambatan, '%H:%i:%s'))"), 'desc')  // Urutkan berdasarkan keterlambatan terbesar
+            ->limit(5)  // Batas 7 pegawai
+            ->get();
+            
+        $topPegawaiRajin = PemeriksaanRalan::select('pegawai.nama as nama_pegawai', 'pemeriksaan_ralan.nip', DB::raw('COUNT(pemeriksaan_ralan.no_rawat) as jumlah_entri'))
+        ->join('pegawai', 'pemeriksaan_ralan.nip', '=', 'pegawai.nik')  // Relasi dengan pegawai melalui nik
+        ->where('pemeriksaan_ralan.tgl_perawatan', '>=', now()->subDays(30))  // Data dari 30 hari terakhir
+        ->groupBy('pemeriksaan_ralan.nip', 'pegawai.nama')  // Tambahkan pegawai.nama ke dalam GROUP BY
+        ->orderBy('jumlah_entri', 'desc')  // Urutkan berdasarkan jumlah entri terbanyak
+        ->limit(5)  // Ambil 10 pegawai teratas
+        ->get();
+            
+        // Ambil data jumlah pegawai per departemen dengan filter stts_aktif = 'AKTIF'
+        $pegawaiPerDepartemen = Pegawai::select('departemen', \DB::raw('count(*) as total'))
+            ->where('stts_aktif', 'AKTIF')
+            ->groupBy('departemen')
+            ->get();
 
+        // Siapkan data untuk chart per departemen
+        $totalDepartemen = $pegawaiPerDepartemen->sum('total');
+        $departemen = $pegawaiPerDepartemen->map(function($item) use ($totalDepartemen) {
+            $percentage = ($item->total / $totalDepartemen) * 100;
+            return [
+                'x' => $item->departemen,
+                'y' => $item->total,
+                'label' => "{$item->total} (" . number_format($percentage, 2) . "%)"
+            ];
+        });
+        $jumlahPegawai = $pegawaiPerDepartemen->pluck('total');
 
-    public function updateJamPulang($id)
-    {
+        // Ambil data jumlah pegawai berdasarkan bidang dengan filter stts_aktif = 'AKTIF'
+        $pegawaiPerBidang = Pegawai::select('bidang', \DB::raw('count(*) as total'))
+            ->where('stts_aktif', 'AKTIF')
+            ->groupBy('bidang')
+            ->get();
+
+        // Siapkan data untuk pie chart
+        $totalBidang = $pegawaiPerBidang->sum('total');
+        $bidang = $pegawaiPerBidang->map(function($item) use ($totalBidang) {
+            $percentage = ($item->total / $totalBidang) * 100;
+            return [
+                'x' => $item->bidang,
+                'y' => $item->total,
+                'label' => "{$item->total} (" . number_format($percentage, 2) . "%)"
+            ];
+        });
+        $jumlahPerBidang = $pegawaiPerBidang->pluck('total');
+        
+        // Get the current date
         $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
 
-        // Temukan entri dengan ID dan tanggal hari ini
-        $temporaryPresensi = TemporaryPresensi::where('id', $id)
-            ->whereDate('jam_datang', $today)
-            ->first();
+        // Query to count patients examined today
+        $jumlahPasienHariIni = RegPeriksa::whereDate('tgl_registrasi', $today)->count();
 
-        if ($temporaryPresensi) {
-            // Perbarui jam pulang
-            $temporaryPresensi->jam_pulang = Carbon::now();
-            $temporaryPresensi->save();
+        // Query to count patients examined yesterday
+        $jumlahPasienKemarin = RegPeriksa::whereDate('tgl_registrasi', $yesterday)->count();
 
-            $jamDatang = Carbon::parse($temporaryPresensi->jam_datang);
-            $jamPulang = Carbon::parse($temporaryPresensi->jam_pulang);
-            $durasi = $jamDatang->diffInMinutes($jamPulang);
-
-            // Tentukan status
-            $shiftTime = $this->getShiftStartTime($temporaryPresensi->shift);
-            $status = $this->getStatus($jamDatang, $jamPulang, $shiftTime);
-
-            // Simpan ke rekap_presensi
-            RekapPresensi::updateOrCreate(
-                ['id' => $id, 'jam_datang' => $jamDatang],
-                [
-                    'shift' => $temporaryPresensi->shift,
-                    'jam_pulang' => $jamPulang,
-                    'status' => $status,
-                    'keterlambatan' => 0,
-                    'durasi' => $durasi
-                ]
-            );
-
-            // Hapus entri dari temporary_presensi
-            $temporaryPresensi->delete();
-
-            return redirect()->back()->with('success', 'Jam pulang berhasil diperbarui dan rekapan presensi telah diperbarui.');
+        // Hitung pertumbuhan pasien
+        if ($jumlahPasienKemarin > 0) {
+            $pertumbuhanPasien = $jumlahPasienHariIni - $jumlahPasienKemarin;
+        } else {
+            // Jika tidak ada pasien kemarin, anggap pertumbuhannya adalah jumlah pasien hari ini
+            $pertumbuhanPasien = $jumlahPasienHariIni;
         }
+        
+        $jumlahPasienRawatInap = KamarInap::where('stts_pulang', '-')
+            ->where('lama', '<', 6)
+            ->count();
+        
+        $jumlahPasienIGD = RegPeriksa::whereDate('tgl_registrasi', $today)
+            ->where('kd_poli', 'IGDK')
+            ->count();
+        // Ambil pegawai yang ulang tahun dalam rentang 10 hari ke depan
+        $tanggalSekarang = Carbon::now();
+        $tanggalAkhir = Carbon::now()->addDays(7);
+        $pegawaiUlangTahun = Pegawai::where('stts_aktif', 'AKTIF')
+            ->whereRaw("DATE_FORMAT(tgl_lahir, '%m-%d') BETWEEN ? AND ?", [
+                $tanggalSekarang->format('m-d'),
+                $tanggalAkhir->format('m-d')
+            ])
+            ->get()
+            ->map(function ($pegawai) use ($tanggalSekarang) {
+                $tanggalLahir = Carbon::parse($pegawai->tgl_lahir)->year($tanggalSekarang->year);
+                $hariIni = $tanggalSekarang->isSameDay($tanggalLahir);
+                $sisaHari = $tanggalSekarang->diffInDays($tanggalLahir, false);
 
-        return redirect()->back()->with('error', 'Data presensi untuk hari ini tidak ditemukan.');
+                if ($hariIni) {
+                    $pegawai->status = 'Selamat Ulang Tahun';
+                    $pegawai->sisaHari = 0;
+                } elseif ($sisaHari > 0) {
+                    $pegawai->status = "Ulang tahun {$sisaHari} hari lagi";
+                    $pegawai->sisaHari = $sisaHari;
+                }
+
+                return $pegawai;
+            })
+            ->filter(function ($pegawai) {
+                return $pegawai->status !== null;
+            })
+            ->sortBy('sisaHari');
+
+        // Jangan lupa untuk menambahkan 'pertumbuhanPasien' ke compact()
+        return view('dashboard.index', compact('departemen', 'jumlahPegawai', 'pegawaiUlangTahun', 'bidang', 'jumlahPerBidang', 'jumlahPasienHariIni', 'pertumbuhanPasien','jumlahPasienRawatInap','jumlahPasienIGD','topTerlambat','topPegawaiRajin'));
     }
-
-    private function getShiftStartTime($shift)
-    {
-        // Implementasi menentukan waktu mulai shift berdasarkan nama shift
-        // Contoh: Pagi = 06:00, Siang = 13:00, Malam = 21:00
-        $shiftTimes = [
-            'Pagi' => '06:00:00',
-            'Siang' => '13:00:00',
-            'Malam' => '21:00:00'
-            // Tambahkan shift lainnya sesuai kebutuhan
-        ];
-
-        return Carbon::parse($shiftTimes[$shift] ?? '00:00:00');
-    }
-
-    private function getStatus($jamDatang, $jamPulang, $shiftTime)
-    {
-        // Implementasi penentuan status berdasarkan jam datang dan shift
-        $toleransi = 1; // dalam menit
-
-        if ($jamDatang->gt($shiftTime->addMinutes($toleransi))) {
-            return 'Terlambat Toleransi';
-        }
-
-        return 'Tepat Waktu'; // Status default jika tepat waktu
-    }
+    
 }

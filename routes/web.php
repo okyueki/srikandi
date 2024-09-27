@@ -12,6 +12,11 @@ use App\Http\Controllers\PengajuanLemburController;
 use App\Http\Controllers\VerifikasiPengajuanLiburController;
 use App\Http\Controllers\VerifikasiPengajuanLemburController;
 use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\Kepegawaian\PresensiController;
+use App\Http\Controllers\Kepegawaian\PegawaiController;
+use App\Http\Controllers\Kepegawaian\AbsensiController;
+
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -46,3 +51,9 @@ Route::get('/pengajuan_lembur/pdf/{kode_pengajuan_lembur}', [PengajuanLemburCont
 Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
 Route::put('/presensi/{id}/datang', [PresensiController::class, 'updateJamDatang'])->name('presensi.updateJamDatang');
 Route::put('/presensi/{id}/pulang', [PresensiController::class, 'updateJamPulang'])->name('presensi.updateJamPulang');
+Route::get('/presensi/verifikasi/{id}', [PresensiController::class, 'verifikasiPresensi'])->name('presensi.verifikasi');
+
+Route::get('/absensi', [AbsensiController::class, 'showPresensiForm'])->name('absensi.show');
+Route::post('/absensi', [AbsensiController::class, 'handlePresensi'])->name('absensi.handle');
+Route::post('/presensi', [App\Http\Controllers\Kepegawaian\AbsensiController::class, 'handlePresensi'])->name('presensi.handle');
+Route::get('/pegawai', [PegawaiController::class, 'index'])->middleware(['auth'])->name('pegawai.index');
