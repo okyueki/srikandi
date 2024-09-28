@@ -15,16 +15,14 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('backend/assets/images/brand-logos/favicon.ico'); }}" type="image/x-icon">
-    <script src="{{ asset('backend/assets/libs/choices.js/public/backend/assets/scripts/choices.min.js'); }}"></script>
-    <!-- Main Theme Js -->
-    <script src="{{ asset('backend/assets/js/main.js'); }}"></script>
+=
     <!-- Bootstrap Css -->
     <link id="style" href="{{ asset('backend/assets/libs/bootstrap/css/bootstrap.min.css'); }}" rel="stylesheet" >
     <!-- Style Css -->
     <link href="{{ asset('backend/assets/css/styles.min.css'); }}" rel="stylesheet" >
     <!-- Icons Css -->
     <link href="{{ asset('backend/assets/css/icons.css'); }}" rel="stylesheet" >
-
+    <link href="{{ asset('backend/assets/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Node Waves Css -->
     <link href="{{ asset('backend/assets/libs/node-waves/waves.min.css') }}" rel="stylesheet">
 
@@ -35,18 +33,18 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
 
-   
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" /> 
     
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
-
+    
     <!-- Sweetalerts CSS -->
     <link rel="stylesheet" href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}">
 
@@ -55,15 +53,51 @@
 
     <!-- Apex Charts JS -->
     <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-
     <!-- Choices JS -->
     <script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
-
+    <!-- Main Theme Js -->
+    <script src="{{ asset('backend/assets/js/main.js'); }}"></script>
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <!-- Dropify -->
     <link rel="stylesheet" href="{{ asset('backend/assets/libs/dropify/dist/dropify.min.css') }}">
     <script src="{{ asset('backend/assets/libs/dropify/dist/dropify.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.js'); }}"></script>
+    <script src="{{ asset('backend/assets/libs/@simonwep/pickr/pickr.es5.min.js'); }}"></script>
+    <script src="{{ asset('backend/assets/js/date&time_pickers.js'); }}"></script>
+<style>
+   .choices__inner {
+        min-height: 44px; /* Sesuaikan dengan kebutuhan */
+        max-height: 200px; /* Membatasi tinggi maksimal dropdown */
+    }
+
+    .choices__list--dropdown .choices__item {
+        white-space: nowrap; /* Mencegah teks terpotong jika terlalu panjang */
+    }
+    .dz-progress {
+        display: none !important;
+    }
+    .flatpickr-time input {
+        padding: 15px;
+    }
+    table.dataTable {
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+        border-collapse: collapse !important;
+    }
+
+    .list-group-item {
+            border: none;
+            position: relative;
+        }
+        .sub-list {
+            padding-left: 30px;
+            border-left: 2px solid #007bff;
+        }
+</style>
 </head>
 
 <body>
@@ -184,11 +218,6 @@
     <script src="{{ asset('backend/assets/js/sticky.js'); }}"></script>
     <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js'); }}"></script>
     <script src="{{ asset('backend/assets/js/simplebar.js'); }}"></script>
-    <script src="{{ asset('backend/assets/libs/@simonwep/pickr/pickr.es5.min.js'); }}"></script>
-    <!-- Date & Time Picker JS -->
-    <script src="{{ asset('backend/assets/libs/flatpickr/flatpickr.min.js'); }}"></script>
-    <script src="{{ asset('backend/assets/js/date&time_pickers.js'); }}"></script>
-   
     <script src="{{ asset('backend/assets/js/custom-switcher.min.js'); }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js'); }}"></script>
 

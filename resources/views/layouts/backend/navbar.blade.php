@@ -122,6 +122,27 @@
                             </ul>
                         </li>
                         <!-- End::slide -->
+                        
+                        <!-- Start::slide -->
+                        <li class="slide has-sub">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M6 19H8V21H6V19M12 3L2 8V21H4V13H20V21H22V8L12 3M8 11H4V9H8V11M14 11H10V9H14V11M20 11H16V9H20V11M6 15H8V17H6V15M10 15H12V17H10V15M10 19H12V21H10V19M14 19H16V21H14V19Z"/></svg>
+                                <span class="side-menu__label">Inventaris</span>
+                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+                                <li class="slide side-menu__label1">
+                                    <a href="javascript:void(0);">Inventaris</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('inventaris-barang.index') }}" class="side-menu__item">Master Barang</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="{{ route('inventaris.index'); }}" class="side-menu__item">Inventaris</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End::slide -->
 
                         <!-- Start::slide__category -->
                         <li class="slide__category"><span class="category-name">Pengaturan</span></li>

@@ -15,6 +15,10 @@ use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\Kepegawaian\PresensiController;
 use App\Http\Controllers\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Kepegawaian\AbsensiController;
+use App\Http\Controllers\Inventaris\InventarisBarangController;
+use App\Http\Controllers\Inventaris\InventarisController;
+use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
+use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
 
 
 Route::get('/', function () {
@@ -57,3 +61,26 @@ Route::get('/absensi', [AbsensiController::class, 'showPresensiForm'])->name('ab
 Route::post('/absensi', [AbsensiController::class, 'handlePresensi'])->name('absensi.handle');
 Route::post('/presensi', [App\Http\Controllers\Kepegawaian\AbsensiController::class, 'handlePresensi'])->name('presensi.handle');
 Route::get('/pegawai', [PegawaiController::class, 'index'])->middleware(['auth'])->name('pegawai.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('inventaris-barang', InventarisBarangController::class)->names([
+        'index' => 'inventaris-barang.index',
+        'create' => 'inventaris-barang.create',
+        'store' => 'inventaris-barang.store',
+        'show' => 'inventaris-barang.show',
+        'edit' => 'inventaris-barang.edit',
+        'update' => 'inventaris-barang.update',
+        'destroy' => 'inventaris-barang.destroy'
+    ]);
+});
+Route::middleware(['auth'])->group(function () {
+    Route::resource('inventaris', InventarisController::class)->names([
+        'index' => 'inventaris.index',
+        'create' => 'inventaris.create',
+        'store' => 'inventaris.store',
+        'show' => 'inventaris.show',
+        'edit' => 'inventaris.edit',
+        'update' => 'inventaris.update',
+        'destroy' => 'inventaris.destroy'
+    ]);
+});
