@@ -7,15 +7,49 @@ use App\Models\InventarisProdusen;
 use App\Models\InventarisMerk;
 use App\Models\InventarisKategori;
 use App\Models\InventarisJenis;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
 class InventarisBarangController extends Controller
 {
-public function index()
+
+public function index(Request $request)
 {
-    $data = InventarisBarang::with(['produsen', 'merk', 'kategori', 'jenis'])->paginate(10); // 10 item per halaman
-    return view('inventaris.index_barang', compact('data'))->with('pageTitle', 'Inventaris Barang');
+    // Cek apakah permintaan dari DataTables (AJAX request)
+    if ($request->ajax()) {
+        $data = InventarisBarang::with(['produsen', 'merk', 'kategori', 'jenis'])->get();
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('produsen', function($row) {
+                return optional($row->produsen)->nama_produsen ?? 'Tidak Diketahui';
+            })
+            ->addColumn('merk', function($row) {
+                return optional($row->merk)->nama_merk ?? 'Tidak Diketahui';
+            })
+            ->addColumn('kategori', function($row) {
+                return optional($row->kategori)->nama_kategori ?? 'Tidak Diketahui';
+            })
+            ->addColumn('jenis', function($row) {
+                return optional($row->jenis)->nama_jenis ?? 'Tidak Diketahui';
+            })
+            ->addColumn('action', function($row) {
+                $btn = '<a href="'.route('inventaris-barang.edit', $row->kode_barang).'" class="btn btn-warning btn-sm mr-2">Edit</a>';
+                $btn .= '<form action="'.route('inventaris-barang.destroy', $row->kode_barang).'" method="POST" style="display:inline;">
+                            '.csrf_field().'
+                            '.method_field("DELETE").'
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                         </form>';
+                return $btn;
+            })
+            ->rawColumns(['action']) // Agar kolom action tidak di-escape HTML-nya
+            ->make(true);
+    }
+
+    // Jika bukan permintaan AJAX, kembalikan view
+    return view('inventaris.index_barang')->with('pageTitle', 'Inventaris Barang');
 }
+
 
     public function create()
     {

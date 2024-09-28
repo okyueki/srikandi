@@ -16,53 +16,49 @@
                 </div>
             @endif
 
-            @if($data->isEmpty())
-                <div class="alert alert-warning">
-                    Tidak ada data inventaris barang yang tersedia.
-                </div>
-            @else
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Kode Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Jumlah</th>
-                            <th>Produsen</th>
-                            <th>Merk</th>
-                            <th>Kategori</th>
-                            <th>Jenis</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data as $barang)
-                        <tr>
-                            <td>{{ $barang->kode_barang }}</td>
-                            <td>{{ $barang->nama_barang }}</td>
-                            <td>{{ $barang->jml_barang }}</td>
-                            <td>{{ optional($barang->produsen)->nama_produsen ?? 'Tidak Diketahui' }}</td>
-                            <td>{{ optional($barang->merk)->nama_merk ?? 'Tidak Diketahui' }}</td>
-                            <td>{{ optional($barang->kategori)->nama_kategori ?? 'Tidak Diketahui' }}</td>
-                            <td>{{ optional($barang->jenis)->nama_jenis ?? 'Tidak Diketahui' }}</td>
-                            <td class="d-flex">
-                                <a href="{{ route('inventaris-barang.edit', $barang->kode_barang) }}" class="btn btn-warning btn-sm mr-2">Edit</a>
-                                <form action="{{ route('inventaris-barang.destroy', $barang->kode_barang) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <!-- Link Paginasi -->
-                <div class="d-flex justify-content-center">
-                    {{ $data->links('vendor.pagination.tabler') }}
-                </div>
-            @endif
+            <table class="table table-bordered table-hover" id="inventaris-barang-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Produsen</th>
+                        <th>Merk</th>
+                        <th>Kategori</th>
+                        <th>Jenis</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data akan dimuat secara dinamis oleh DataTables -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Inisialisasi DataTables dengan AJAX
+        $('#inventaris-barang-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('inventaris-barang.index') }}',
+            columns: [
+                { data: null, searchable: false, orderable: false, render: function (data, type, row, meta) {
+                    return meta.row + 1; // Menambahkan nomor urut
+                }},
+                { data: 'kode_barang', name: 'kode_barang' },
+                { data: 'nama_barang', name: 'nama_barang' },
+                { data: 'jml_barang', name: 'jml_barang' },
+                { data: 'produsen', name: 'produsen' },
+                { data: 'merk', name: 'merk' },
+                { data: 'kategori', name: 'kategori' },
+                { data: 'jenis', name: 'jenis' },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
+            ]
+        });
+    });
+</script>
 @endsection
