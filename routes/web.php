@@ -15,10 +15,14 @@ use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\Kepegawaian\PresensiController;
 use App\Http\Controllers\Kepegawaian\PegawaiController;
 use App\Http\Controllers\Kepegawaian\AbsensiController;
+use App\Http\Controllers\Kepegawaian\BirthdayController;
+use App\Http\Controllers\Kepegawaian\PenilaianController;
+use App\Http\Controllers\Kepegawaian\ItemPenilaianController;
 use App\Http\Controllers\Inventaris\InventarisBarangController;
 use App\Http\Controllers\Inventaris\InventarisController;
 use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
 use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
+use App\Http\Controllers\FullCalendarController;
 
 
 Route::get('/', function () {
@@ -84,3 +88,33 @@ Route::middleware(['auth'])->group(function () {
         'destroy' => 'inventaris.destroy'
     ]);
 });
+
+Route::get('/calendar', [FullCalendarController::class, 'index'])->name('calendar.index');
+Route::get('/pegawai/birthday', [BirthdayController::class, 'index'])->name('pegawai.birthday');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('penilaian', PenilaianController::class)->names([
+        'index' => 'penilaian.index',
+        'create' => 'penilaian.create',
+        'store' => 'penilaian.store',
+        'show' => 'penilaian.show',
+        'edit' => 'penilaian.edit',
+        'update' => 'penilaian.update',
+        'destroy' => 'penilaian.destroy',
+    ]);
+
+    Route::resource('item_penilaian', ItemPenilaianController::class)->names([
+        'index' => 'item_penilaian.index',
+        'create' => 'item_penilaian.create',
+        'store' => 'item_penilaian.store',
+        'show' => 'item_penilaian.show',
+        'edit' => 'item_penilaian.edit',
+        'update' => 'item_penilaian.update',
+        'destroy' => 'item_penilaian.destroy',
+    ]);
+
+    Route::get('/search-pegawai', [PenilaianController::class, 'searchPegawai'])
+        ->name('penilaian.search_pegawai');
+});
+
+Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');

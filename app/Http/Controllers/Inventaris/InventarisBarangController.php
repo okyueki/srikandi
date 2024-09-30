@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Inventaris;
-use App\Http\Controllers\Controller; // Import Controller utama
+use App\Http\Controllers\Controller; 
 use App\Models\InventarisBarang;
 use App\Models\InventarisProdusen;
 use App\Models\InventarisMerk;
