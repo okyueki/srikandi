@@ -23,6 +23,7 @@ use App\Http\Controllers\Inventaris\InventarisController;
 use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
 use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
 use App\Http\Controllers\FullCalendarController;
+use App\Http\Controllers\SuratKeluarController;
 
 
 Route::get('/', function () {
@@ -118,3 +119,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');
+Route::resource('surat_keluar', SuratKeluarController::class)->middleware('auth');
