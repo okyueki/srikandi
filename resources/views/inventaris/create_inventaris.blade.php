@@ -1,6 +1,6 @@
 @extends('layouts.pages-layouts')
 
-@section('pageTitle', isset($pageTitle) ? $pageTitle : 'Create Dokter')
+@section('pageTitle', isset($pageTitle) ? $pageTitle : 'Create Inventaris')
 
 @section('content')
 <div class="col-12">
@@ -19,14 +19,32 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inisialisasi Choices.js untuk semua dropdown
+        const kodeBarang = new Choices('#kode_barang', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const asalBarang = new Choices('#asal_barang', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const statusBarang = new Choices('#status_barang', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idRuang = new Choices('#id_ruang', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+    });
+
+    // Mengambil data barang berdasarkan pilihan kode_barang
     $(document).ready(function() {
         $('#kode_barang').change(function() {
             var kode_barang = $(this).val();
