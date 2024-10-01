@@ -17,21 +17,29 @@
         </div>
     </div>
 </div>
-<!-- Select2 Initialization -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
 
-        // Initialize for kode_barang and id_ruang
-        $('#kode_barang').select2();
-        $('#id_ruang').select2();
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inisialisasi Choices.js untuk dropdown
+        const kodeProdusen = new Choices('#kode_produsen', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idMerk = new Choices('#id_merk', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idKategori = new Choices('#id_kategori', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idJenis = new Choices('#id_jenis', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
     });
 </script>
 @endsection
-

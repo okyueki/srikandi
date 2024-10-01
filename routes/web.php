@@ -24,6 +24,12 @@ use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
 use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\Helpdesk\HelpdeskController;
+use App\Http\Controllers\Helpdesk\ResponKerjaController;
+use App\Http\Controllers\Helpdesk\KomentarController;
+use App\Http\Controllers\Helpdesk\TicketTeknisiController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\Tiket\ResponTiketController;
 
 
 Route::get('/', function () {
@@ -120,3 +126,14 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');
 Route::resource('surat_keluar', SuratKeluarController::class)->middleware('auth');
+
+Route::resource('tickets', TicketController::class);
+Route::get('/get-no-hp', [TicketController::class, 'getNoHp'])->name('get.nohp');
+
+Route::get('/helpdesk/dashboard', [HelpdeskController::class, 'index'])->name('helpdesk.dashboard');
+Route::get('/helpdesk/ticket/{id}', [HelpdeskController::class, 'show'])->name('helpdesk.ticket.show');
+Route::get('/helpdesk/ticket/{id}/respon/create', [ResponKerjaController::class, 'create'])->name('responKerja.create');
+Route::post('/helpdesk/ticket/{id}/respon', [ResponKerjaController::class, 'store'])->name('responKerja.store');
+Route::put('/helpdesk/ticket/respon/{id}', [ResponKerjaController::class, 'update'])->name('responKerja.update');
+Route::post('/helpdesk/ticket/{ticket}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+Route::post('/helpdesk/ticket/{ticket}/teknisi', [TicketTeknisiController::class, 'store'])->name('teknisi.store');
