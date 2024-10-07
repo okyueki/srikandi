@@ -40,4 +40,16 @@ class Pegawai extends Model
     {
         return $this->hasMany(PemeriksaanRalan::class, 'nip', 'nik');
     }
+    public function petugas()
+    {
+        return $this->hasOne(Petugas::class, 'nip', 'nik'); // Assuming 'nip' in Petugas corresponds to 'nik' in Pegawai
+    }
+    public function verifikasi()
+    {
+        return $this->hasMany(VerifikasiSurat::class, 'nik_verifikator', 'nik');
+    }
+    public function departemen_unit()
+    {
+        return $this->belongsTo(Departemen::class, 'departemen', 'dep_id');
+    }
 }

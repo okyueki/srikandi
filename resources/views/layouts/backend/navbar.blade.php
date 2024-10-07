@@ -29,7 +29,7 @@
                                     <a href="javascript:void(0);">Surat Menyurat</a>
                                 </li>
                                 <li class="slide">
-                                    <a href="borders.html" class="side-menu__item">Surat Masuk</a>
+                                    <a href="{{ route('surat_masuk.index'); }}" class="side-menu__item">Surat Masuk</a>
                                 </li>
                                 <li class="slide">
                                     <a href="{{ route('surat_keluar.index'); }}" class="side-menu__item">Surat Keluar</a>
