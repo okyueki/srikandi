@@ -26,60 +26,90 @@
                 </ul>
                 <div class="tab-content" id="responTabContent">
                     <!-- Tab Respon -->
-                    <div class="tab-pane fade show active" id="respon" role="tabpanel" aria-labelledby="respon-tab">
-                        <form action="{{ isset($responKerja) ? route('responKerja.update', $responKerja->id) : route('responKerja.store', $ticket->id) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @if(isset($responKerja))
-                                @method('PUT') <!-- Tambahkan method PUT untuk update -->
-                            @endif
-    
-                            <div class="mb-3">
-                                <label for="teknisi_id" class="form-label">Teknisi</label>
-                                <select name="teknisi_id" class="form-select" required>
-                                    <option value="" disabled {{ !isset($responKerja) ? 'selected' : '' }}>Pilih Teknisi</option>
-                                    @foreach($pegawai as $teknisi)
-                                        <option value="{{ $teknisi->nik }}" {{ isset($responKerja) && $responKerja->teknisi_id == $teknisi->nik ? 'selected' : '' }}>
-                                            {{ $teknisi->nama }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="deskripsi_hasil" class="form-label">Deskripsi Hasil</label>
-                                <textarea name="deskripsi_hasil" class="form-control" rows="5" required>{{ $responKerja->deskripsi_hasil ?? '' }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="status_akhir" class="form-label">Status Akhir</label>
-                                <select name="status_akhir" class="form-select" required>
-                                    <option value="selesai" {{ isset($responKerja) && $responKerja->status_akhir == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                                    <option value="minta bantuan pihak ketiga" {{ isset($responKerja) && $responKerja->status_akhir == 'minta bantuan pihak ketiga' ? 'selected' : '' }}>Minta Bantuan Pihak Ketiga</option>
-                                    <option value="lanjut" {{ isset($responKerja) && $responKerja->status_akhir == 'lanjut' ? 'selected' : '' }}>Lanjut</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tingkat_kesulitan" class="form-label">Tingkat Kesulitan</label>
-                                <select name="tingkat_kesulitan" class="form-select" required>
-                                    <option value="mudah" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'mudah' ? 'selected' : '' }}>Mudah</option>
-                                    <option value="sedang" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'sedang' ? 'selected' : '' }}>Sedang</option>
-                                    <option value="sulit" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'sulit' ? 'selected' : '' }}>Sulit</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="biaya" class="form-label">Biaya (Opsional)</label>
-                                <input type="number" name="biaya" step="0.01" class="form-control" value="{{ $responKerja->biaya ?? '' }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="petunjuk_penyelesaian" class="form-label">Petunjuk Penyelesaian (Opsional)</label>
-                                <textarea name="petunjuk_penyelesaian" class="form-control" rows="3">{{ $responKerja->petunjuk_penyelesaian ?? '' }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="foto_hasil" class="form-label">Upload Foto Hasil (Opsional)</label>
-                                <input type="file" name="foto_hasil" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-success">{{ isset($responKerja) ? 'Perbarui Respon' : 'Simpan Respon' }}</button>
-                        </form>
+                    <div class="tab-content" id="responTabContent">
+                        <!-- Tab Respon -->
+                        <div class="tab-pane fade show active" id="respon" role="tabpanel" aria-labelledby="respon-tab">
+                            <form action="{{ isset($responKerja) ? route('responKerja.update', $responKerja->id) : route('responKerja.store', $ticket->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @if(isset($responKerja))
+                                    @method('PUT') <!-- Tambahkan method PUT untuk update -->
+                                @endif
+                    
+                                <!-- Teknisi Dropdown -->
+                                <div class="mb-3">
+                                    <label for="teknisi_id" class="form-label">Teknisi</label>
+                                    <select name="teknisi_id" class="form-select" required>
+                                        <option value="" disabled {{ !isset($responKerja) ? 'selected' : '' }}>Pilih Teknisi</option>
+                                        @foreach($pegawai as $teknisi)
+                                            <option value="{{ $teknisi->nik }}" {{ isset($responKerja) && $responKerja->teknisi_id == $teknisi->nik ? 'selected' : '' }}>
+                                                {{ $teknisi->nama }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                    
+                                <!-- Deskripsi Hasil -->
+                                <div class="mb-3">
+                                    <label for="deskripsi_hasil" class="form-label">Deskripsi Hasil</label>
+                                    <textarea name="deskripsi_hasil" class="form-control" rows="5" required>{{ $responKerja->deskripsi_hasil ?? '' }}</textarea>
+                                </div>
+                    
+                                <!-- Status Akhir Respon -->
+                                <div class="mb-3">
+                                    <label for="status_akhir" class="form-label">Status Akhir</label>
+                                    <select name="status_akhir" class="form-select" required>
+                                        <option value="selesai" {{ isset($responKerja) && $responKerja->status_akhir == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                        <option value="minta bantuan pihak ketiga" {{ isset($responKerja) && $responKerja->status_akhir == 'minta bantuan pihak ketiga' ? 'selected' : '' }}>Minta Bantuan Pihak Ketiga</option>
+                                        <option value="lanjut" {{ isset($responKerja) && $responKerja->status_akhir == 'lanjut' ? 'selected' : '' }}>Lanjut</option>
+                                    </select>
+                                </div>
+                    
+                                <!-- Tingkat Kesulitan -->
+                                <div class="mb-3">
+                                    <label for="tingkat_kesulitan" class="form-label">Tingkat Kesulitan</label>
+                                    <select name="tingkat_kesulitan" class="form-select" required>
+                                        <option value="mudah" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'mudah' ? 'selected' : '' }}>Mudah</option>
+                                        <option value="sedang" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'sedang' ? 'selected' : '' }}>Sedang</option>
+                                        <option value="sulit" {{ isset($responKerja) && $responKerja->tingkat_kesulitan == 'sulit' ? 'selected' : '' }}>Sulit</option>
+                                    </select>
+                                </div>
+                    
+                                <!-- Biaya -->
+                                <div class="mb-3">
+                                    <label for="biaya" class="form-label">Biaya (Opsional)</label>
+                                    <input type="number" name="biaya" step="0.01" class="form-control" value="{{ $responKerja->biaya ?? '' }}">
+                                </div>
+                    
+                                <!-- Petunjuk Penyelesaian -->
+                                <div class="mb-3">
+                                    <label for="petunjuk_penyelesaian" class="form-label">Petunjuk Penyelesaian (Opsional)</label>
+                                    <textarea name="petunjuk_penyelesaian" class="form-control" rows="3">{{ $responKerja->petunjuk_penyelesaian ?? '' }}</textarea>
+                                </div>
+                    
+                                <!-- Foto Hasil -->
+                                <div class="mb-3">
+                                    <label for="foto_hasil" class="form-label">Upload Foto Hasil (Opsional)</label>
+                                    <input type="file" name="foto_hasil" class="form-control">
+                                </div>
+                    
+                                <!-- Status Tiket -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status Tiket</label>
+                                    <select name="status" class="form-select" required>
+                                        <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
+                                        <option value="in progress" {{ $ticket->status == 'in progress' ? 'selected' : '' }}>In Progress</option>
+                                        <option value="in review" {{ $ticket->status == 'in review' ? 'selected' : '' }}>In Review</option>
+                                        <option value="close" {{ $ticket->status == 'close' ? 'selected' : '' }}>Close</option>
+                                        <option value="pending" {{ $ticket->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="di jadwalkan" {{ $ticket->status == 'di jadwalkan' ? 'selected' : '' }}>Di Jadwalkan</option>
+                                    </select>
+                                </div>
+                    
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-success">{{ isset($responKerja) ? 'Perbarui Respon' : 'Simpan Respon' }}</button>
+                            </form>
+                        </div>
                     </div>
-    
                     <!-- Tab Komentar -->
                     <div class="tab-pane fade" id="komentar" role="tabpanel" aria-labelledby="komentar-tab">
                         <!-- Form untuk menambahkan komentar -->
@@ -183,15 +213,25 @@
                                 <span class="badge bg-success">Low</span>
                             @endif
                         </p>
-                        <p><strong>Status:</strong> 
-                            @if($ticket->status == 'Open')
-                                <span class="badge bg-info">Open</span>
-                            @elseif($ticket->status == 'In Progress')
-                                <span class="badge bg-warning">In Progress</span>
-                            @else
-                                <span class="badge bg-success">Closed</span>
-                            @endif
-                        </p>
+                        <p class="mb-2">
+                        <strong>Status:</strong>
+                        @if($ticket->status == 'open')
+                            <span class="badge bg-danger">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'in progress')
+                            <span class="badge bg-warning text-dark">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'in review')
+                            <span class="badge bg-primary">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'close')
+                            <span class="badge bg-light text-dark">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'pending')
+                            <span class="badge bg-secondary">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'di jadwalkan')
+                            <span class="badge bg-dark">{{ ucfirst($ticket->status) }}</span>
+                        @else
+                            <span class="badge bg-light text-dark">Unknown</span>
+                        @endif
+                    </p>
+
                     </div>
                     <div class="col-md-6">
                         <p><strong>Deadline:</strong> {{ $ticket->deadline }}</p>

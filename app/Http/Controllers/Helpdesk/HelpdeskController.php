@@ -25,4 +25,6 @@ class HelpdeskController extends Controller
     // Kirim data tiket ke view
     return view('helpdesk.show_helpdesk', compact('ticket'));
 }
+
+
 }

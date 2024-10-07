@@ -47,12 +47,20 @@
                     <!-- Status dengan Badge -->
                     <p class="mb-2">
                         <strong>Status:</strong>
-                        @if($ticket->status == 'Open')
-                            <span class="badge bg-info">{{ ucfirst($ticket->status) }}</span>
-                        @elseif($ticket->status == 'In Progress')
-                            <span class="badge bg-warning">{{ ucfirst($ticket->status) }}</span>
+                        @if($ticket->status == 'open')
+                            <span class="badge bg-danger">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'in progress')
+                            <span class="badge bg-warning text-dark">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'in review')
+                            <span class="badge bg-primary">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'close')
+                            <span class="badge bg-light text-dark">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'pending')
+                            <span class="badge bg-secondary">{{ ucfirst($ticket->status) }}</span>
+                        @elseif($ticket->status == 'di jadwalkan')
+                            <span class="badge bg-dark">{{ ucfirst($ticket->status) }}</span>
                         @else
-                            <span class="badge bg-success">{{ ucfirst($ticket->status) }}</span>
+                            <span class="badge bg-light text-dark">Unknown</span>
                         @endif
                     </p>
                     <p class="mb-2"><strong>respon tiket:</strong> {{ $ticket->response_time ?? 'Belum ada respon' }} </p>

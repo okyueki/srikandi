@@ -25,11 +25,11 @@
                     </p>
                     <p><strong>Status:</strong> 
                         @if($ticket->status == 'Open')
-                            <span class="badge bg-info">Open</span>
+                            <span class="badge bg-info">{{ ucfirst($ticket->status) }}</span>
                         @elseif($ticket->status == 'In Progress')
-                            <span class="badge bg-warning">In Progress</span>
+                            <span class="badge bg-warning">{{ ucfirst($ticket->status) }}</span>
                         @else
-                            <span class="badge bg-success">Closed</span>
+                            <span class="badge bg-success">{{ ucfirst($ticket->status) }}</span>
                         @endif
                     </p>
                 </div>

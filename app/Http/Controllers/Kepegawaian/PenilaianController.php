@@ -9,6 +9,8 @@ use App\Models\ItemPenilaian;
 use App\Models\Pegawai;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use App\Exports\PenilaianExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenilaianController extends Controller
 {
@@ -83,7 +85,14 @@ class PenilaianController extends Controller
         'waktu_penilaian' => $request->waktu_penilaian,
     ]);
 
+    $totalNilai = 0;
+
     foreach ($request->item_penilaian as $itemId => $nilai) {
+        $item = ItemPenilaian::find($itemId);
+        if ($item) {
+            $totalNilai += $nilai * ($item->bobot_nilai ?? 0);
+        }
+
         DetailPenilaian::create([
             'penilaian_harian_id' => $penilaian->id,
             'item_penilaian_id' => $itemId,
@@ -91,8 +100,12 @@ class PenilaianController extends Controller
         ]);
     }
 
+    // Update the total_nilai in PenilaianHarian table
+    $penilaian->update(['total_nilai' => $totalNilai]);
+
     return redirect()->route('penilaian.index')->with('success', 'Penilaian berhasil disimpan.');
 }
+
 
     public function show($id)
 {
@@ -101,8 +114,8 @@ class PenilaianController extends Controller
 
     // Menghitung total nilai
     $totalNilai = $penilaian->detailPenilaian->reduce(function ($carry, $detail) {
-        return $carry + ($detail->nilai ? $detail->itemPenilaian->bobot_nilai : 0);
-    }, 0);
+    return $carry + ($detail->nilai && $detail->itemPenilaian ? $detail->itemPenilaian->bobot_nilai : 0);
+}, 0);
 
     return view('budayakerja.penilaian_show', compact('penilaian', 'totalNilai'));
 }
@@ -144,4 +157,9 @@ public function rekapitulasiBulanan(Request $request)
     return redirect()->back()->with('success', 'Rekapitulasi bulanan berhasil dilakukan.');
 }
 
+public function export()
+{
+
+    return Excel::download(new PenilaianExport, 'penilaian.xlsx');
+}
 }
