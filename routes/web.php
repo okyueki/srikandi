@@ -18,6 +18,7 @@ use App\Http\Controllers\Kepegawaian\AbsensiController;
 use App\Http\Controllers\Kepegawaian\BirthdayController;
 use App\Http\Controllers\Kepegawaian\PenilaianController;
 use App\Http\Controllers\Kepegawaian\ItemPenilaianController;
+use App\Http\Controllers\Kepegawaian\JadwalController;
 use App\Http\Controllers\Inventaris\InventarisBarangController;
 use App\Http\Controllers\Inventaris\InventarisController;
 use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Helpdesk\KomentarController;
 use App\Http\Controllers\Helpdesk\TicketTeknisiController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Tiket\ResponTiketController;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -132,6 +134,8 @@ Route::resource('surat_masuk', SuratMasukController::class)->middleware('auth');
 Route::get('/surat_masuk/verifikasi/{encryptedKodeSurat}', [SuratMasukController::class, 'verifikasi'])->name('surat_masuk.verifikasi');
 
 Route::resource('tickets', TicketController::class);
+Route::put('/ticket/{id}/status', [ResponKerjaController::class, 'updateStatus'])->name('ticket.updateStatus');
+
 Route::get('/get-no-hp', [TicketController::class, 'getNoHp'])->name('get.nohp');
 
 Route::get('/helpdesk/dashboard', [HelpdeskController::class, 'index'])->name('helpdesk.dashboard');
@@ -141,3 +145,10 @@ Route::post('/helpdesk/ticket/{id}/respon', [ResponKerjaController::class, 'stor
 Route::put('/helpdesk/ticket/respon/{id}', [ResponKerjaController::class, 'update'])->name('responKerja.update');
 Route::post('/helpdesk/ticket/{ticket}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
 Route::post('/helpdesk/ticket/{ticket}/teknisi', [TicketTeknisiController::class, 'store'])->name('teknisi.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    Route::get('jadwal/{id}/edit/{bulan}/{tahun}', [JadwalController::class, 'edit'])->name('jadwal.edit');
+    Route::put('jadwal/{id}/update/{bulan}/{tahun}', [JadwalController::class, 'update'])->name('jadwal.update');
+});
+
