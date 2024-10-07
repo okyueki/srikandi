@@ -105,5 +105,42 @@
         </div>
 
 <!-- End Page-content -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize flatpickr for date field
+        flatpickr('#tanggal_surat', {
+            dateFormat: "Y-m-d",
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('id_klasifikasi_surat');
+            const choices = new Choices(element, {
+            
+                searchEnabled: true,
+                position: 'bottom', // Menampilkan dropdown di bawah elemen
+                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
+            });
 
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('id_sifat_surat');
+            const choices = new Choices(element, {
+        
+                searchEnabled: true,
+                position: 'bottom', // Menampilkan dropdown di bawah elemen
+                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
+            });
+
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('nik_atasan_langsung');
+            const choices = new Choices(element, {
+    
+                searchEnabled: true,
+                position: 'top', // Menampilkan dropdown di bawah elemen
+                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
+            });
+
+        });
+</script>
 @endsection

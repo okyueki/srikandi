@@ -89,16 +89,4 @@
             </div>
         </div>
 <!-- End Page-content -->
-<script>
-     document.addEventListener('DOMContentLoaded', function () {
-            const element = document.getElementById('status');
-            const choices = new Choices(element, {
-                placeholderValue: 'Select Status...',
-                searchEnabled: true,
-                position: 'top', // Menampilkan dropdown di bawah elemen
-                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
-            });
-
-        });
-</script>
 @endsection
