@@ -25,6 +25,7 @@ use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
 use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\SuratKeluarController;
+use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\Helpdesk\HelpdeskController;
 use App\Http\Controllers\Helpdesk\ResponKerjaController;
 use App\Http\Controllers\Helpdesk\KomentarController;
@@ -32,7 +33,6 @@ use App\Http\Controllers\Helpdesk\TicketTeknisiController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Tiket\ResponTiketController;
 use Illuminate\Support\Facades\Log;
-
 
 Route::get('/', function () {
     return view('auth.login');
@@ -128,6 +128,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');
 Route::resource('surat_keluar', SuratKeluarController::class)->middleware('auth');
+Route::get('/surat_keluar/show/{encryptedKodeSurat}', [SuratKeluarController::class, 'show'])->name('surat_keluar.show');
+
+Route::resource('surat_masuk', SuratMasukController::class)->middleware('auth');
+Route::get('/surat_masuk/verifikasi/{encryptedKodeSurat}', [SuratMasukController::class, 'verifikasi'])->name('surat_masuk.verifikasi');
 
 Route::resource('tickets', TicketController::class);
 Route::put('/ticket/{id}/status', [ResponKerjaController::class, 'updateStatus'])->name('ticket.updateStatus');

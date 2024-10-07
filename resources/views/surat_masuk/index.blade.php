@@ -9,8 +9,6 @@
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-body">
-                        <a href="{{ route('surat_keluar.create') }}" class="btn btn-success waves-effect waves-light mb-3">Create Surat Keluar</a>
-
                         @if ($message = Session::get('success'))
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
@@ -42,11 +40,15 @@
 
 <!-- End Page-content -->
 <script>
-        $(document).ready(function() {
+        document.addEventListener('DOMContentLoaded', function () {
     $('#suratTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('surat_keluar.index') }}',
+        ajax: '{{ route('surat_masuk.index') }}',
+        dataSrc: function(json) {
+            console.log(json); // Cek response dari server
+            return json.data; // Return data ke DataTables
+        },
         columns: [
             
              { data: null, searchable: false, orderable: false, render: function (data, type, row, meta) {
@@ -56,7 +58,13 @@
             { data: 'perihal', name: 'perihal' },
             { data: 'tanggal_surat', name: 'tanggal_surat' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
-        ]
+        ],
+        rowCallback: function(row, data, index) {
+                // Cek jika statusnya "Dikirim"
+                if (data.status === 'Dikirim') {
+                    $(row).css('background-color', '#f9dedc'); // Warna kuning (warning)
+                }
+            }
     });
 
     $('#suratTable').on('click', '.deletesurat', function (e) {
