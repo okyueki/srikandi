@@ -19,7 +19,7 @@ class CreateSuratTable extends Migration
             $table->string('nomor_surat')->nullable();
             $table->unsignedBigInteger('id_klasifikasi_surat')->nullable();
             $table->unsignedBigInteger('id_sifat_surat')->nullable();
-            $table->string('nik_pengirim', 20);
+            $table->string('nik_pengirim', 20)->nullable();
             $table->string('perihal');
             $table->date('tanggal_surat');
             $table->string('lampiran', 20);

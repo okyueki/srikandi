@@ -92,6 +92,9 @@
             padding-left: 30px;
             border-left: 2px solid #007bff;
         }
+        .btn-group .btn {
+    padding: .45rem .75rem !important;
+}
 </style>
 </head>
 

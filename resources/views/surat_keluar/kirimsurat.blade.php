@@ -11,7 +11,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Detail Surat Keluar</span>    
+                                    <span class="d-none d-sm-block">Kirim Surat Keluar</span>    
                                 </a>
                              </li>
                             <li class="nav-item">
@@ -20,7 +20,12 @@
                                     <span class="d-none d-sm-block">PDF</span>    
                                 </a>
                             </li>
-                                           
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#lampiran" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block">Lampiran</span>    
+                                </a>
+                            </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content p-3 text-muted">
@@ -42,7 +47,7 @@
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Nama Pegawai</div>
+                                                    <div class="fw-bold">Pengirim</div>
                                                     {{ $surat->pegawai->nama }}
                                                 </div>
                                             </li>
@@ -70,7 +75,8 @@
                                                         @foreach ($verifikasiSurat as $vS)
                                                         <li>
                                                         <span style="font-size: 14px;" class="badge 
-                                                                    @if($vS->status_surat == 'Dikirim') bg-warning 
+                                                                    @if($vS->status_surat == 'Dikirim') bg-warning
+                                                                    @elseif($vS->status_surat == 'Dibaca') bg-success 
                                                                     @elseif($vS->status_surat == 'Disetujui') bg-success 
                                                                     @elseif($vS->status_surat == 'Ditolak') bg-danger 
                                                                     @endif">
@@ -86,11 +92,44 @@
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
                                                     <div class="fw-bold">Disposisi</div>
-                                                    <!-- Tambahkan konten disposisi di sini -->
+                                                    <ul>
+                                                        @foreach ($disposisiAll as $dA)
+                                                        <li>
+                                                        <span style="font-size: 14px;" class="badge 
+                                                                    @if($dA->status_disposisi == 'Dikirim') bg-warning
+                                                                    @elseif($dA->status_disposisi == 'Dibaca') bg-success 
+                                                                    @elseif($dA->status_disposisi == 'Ditindaklanjuti') bg-success 
+                                                                    @elseif($dA->status_disposisi == 'Selesai') bg-success 
+                                                                    @endif">
+                                                                    {{ $dA->status_disposisi }}
+                                                                </span>
+                                                        {{$dA->pegawai2->nama}} {{$dA->tanggal_disposisi}}
+                                                        <p><span style="font-weight: 900;">Catatan : </span>{{$dA->catatan_disposisi ?? 'Tidak Ada Catatan'}}</p>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </div>
                                             </li>
                                         </ol>
+                                        <a class="btn btn-info waves-effect waves-light edit" href="{{ route('surat_keluar.edit', $surat->id_surat) }}"><i class="far fa-edit"></i> Edit Surat</a>
                                     </div>
+                                    <hr>
+                                    <form action="{{ route('surat_keluar.kirimSuratProses') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                
+                                        <input type="hidden" name="id_surat" value="{{ $surat->id_surat }}">
+                                        <div class="form-group mb-3">
+                                            <label for="nik_atasan_langsung">Kirim ke Atasan Langsung:</label>
+                                            <select name="nik_atasan_langsung" id="nik_atasan_langsung" class="form-control">
+                                                <option value="">-- Select Pegawai --</option>
+                                                @foreach ($pegawai as $p)
+                                                    <option value="{{ $p->nik }}" {{ isset($verifikasi) && $p->nik == $verifikasi->nik_verifikator ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="tab-pane" id="profile" role="tabpanel">
@@ -98,8 +137,15 @@
                                 <!-- Pesan fallback jika PDF tidak dapat dimuat -->
                                 <p>Your browser does not support PDFs. Please download the PDF to view it: <a href="{{ $pdfUrl }}">Download PDF</a>.</p>
                             </object> 
+                            </div>
+                            <div class="tab-pane" id="lampiran" role="tabpanel">
                             @if(!empty($surat->file_lampiran))
-                                <a href="{{ asset('storage/' . $surat->file_lampiran) }}" target="_blank" class="btn btn-primary">Download</a>
+                                <object data="{{ Storage::url($surat->file_lampiran) }}" type="application/pdf" width="100%" height="400px">
+                                    <!-- Pesan fallback jika PDF tidak dapat dimuat -->
+                                    <p>Your browser does not support PDFs. Please download the PDF to view it: <a href="{{ Storage::url($surat->file_lampiran) }}">Download PDF</a>.</p>
+                                </object>
+                            @else
+                                <h4>Tidak Ada Lampiran</h4>
                             @endif
                             </div>
                         </div>                                  
@@ -107,4 +153,16 @@
                 </div>
             </div>
         </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('nik_atasan_langsung');
+            const choices = new Choices(element, {
+                placeholderValue: 'Search Pegawai...',
+                searchEnabled: true,
+                position: 'top', // Menampilkan dropdown di bawah elemen
+                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
+            });
+
+        });
+        </script>
 @endsection

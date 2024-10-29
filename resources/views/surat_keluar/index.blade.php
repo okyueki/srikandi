@@ -9,8 +9,21 @@
             <div class="col-xl-12">
                 <div class="card custom-card">
                     <div class="card-body">
-                        <a href="{{ route('surat_keluar.create') }}" class="btn btn-success waves-effect waves-light mb-3">Create Surat Keluar</a>
-
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="{{ route('surat_keluar.create') }}" class="btn btn-success me-2">
+                            Create Surat Keluar
+                        </a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Template Surat
+                            </button>
+                            <ul class="dropdown-menu">
+                                @foreach($templateSurat as $ts)
+                                <li><a class="dropdown-item" href="{{ asset('storage/' . $ts->file_template) }}">{{ $ts->nama_template }}</a></li>
+                                @endforeach        
+                            </ul>
+                        </div>
+                    </div>
                         @if ($message = Session::get('success'))
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {

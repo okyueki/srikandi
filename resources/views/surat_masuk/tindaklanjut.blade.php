@@ -25,7 +25,7 @@
                                     <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                     <span class="d-none d-sm-block">Lampiran</span>    
                                 </a>
-                            </li>             
+                            </li>               
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content p-3 text-muted">
@@ -47,7 +47,7 @@
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
-                                                <div class="fw-bold">Pengirim</div>
+                                                    <div class="fw-bold">Pengirim</div>
                                                     @if($surat->nik_pengirim=="")
                                                         {{ $surat->pengirim_external }}
                                                     @else
@@ -96,60 +96,60 @@
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
                                                     <div class="fw-bold">Disposisi</div>
-                                                    <!-- Tambahkan konten disposisi di sini -->
+                                                    <ul>
+                                                        @foreach ($disposisiAll as $dA)
+                                                        <li>
+                                                        <span style="font-size: 14px;" class="badge 
+                                                                    @if($dA->status_disposisi == 'Dikirim') bg-warning
+                                                                    @elseif($dA->status_disposisi == 'Dibaca') bg-success 
+                                                                    @elseif($dA->status_disposisi == 'Ditindaklanjuti') bg-success 
+                                                                    @elseif($dA->status_disposisi == 'Selesai') bg-success 
+                                                                    @endif">
+                                                                    {{ $dA->status_disposisi }}
+                                                                </span>
+                                                        {{$dA->pegawai2->nama}} {{$dA->tanggal_disposisi}}
+                                                        <p><span style="font-weight: 900;">Catatan : </span>{{$dA->catatan_disposisi ?? 'Tidak Ada Catatan'}}</p>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </div>
                                             </li>
                                         </ol>
-                                        <a class="btn btn-info waves-effect waves-light edit" href="{{ route('surat_masuk.edit', $surat->id_surat) }}"><i class="far fa-edit"></i> Edit Surat</a>
-                                        <form action="{{ route('surat_masuk.destroy', $surat->id_surat) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger waves-effect waves-light deletesurat">
-                                                <i class="far fa-trash-alt"></i> Hapus Surat
-                                            </button>
-                                        </form>
                                     </div>
-                                    
                                     <div class="col-lg-12">
-                                    <form action="{{ route('surat_masuk.verifikasiProses', $surat->verifikasi->id_verifikasi_surat) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group">
-                                            <label for="status_surat">Status Verifikasi</label>
-                                            @if(in_array($surat->verifikasi->status_surat, ['Dikirim', 'Dibaca']))
+                                    <form action="{{ route('surat_masuk.tindaklanjutProses', $disposisiTerbaru->id_disposisi_surat) }}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                            <label for="status_disposisi">Status Disposisi</label>
+                                            @if(in_array($disposisiTerbaru->status_disposisi, ['Dikirim', 'Dibaca']))
                                                 <!-- Jika status Dikirim atau Dibaca, tampilkan dropdown untuk memilih -->
-                                                <select name="status_surat" class="form-control" id="status_surat">
-                                                    <option value="Disetujui">Disetujui</option>
-                                                    <option value="Ditolak">Ditolak</option>
+                                                <select name="status_disposisi" class="form-control" id="status_surat">
+                                                    <option value="Ditindaklanjuti">Ditindaklanjuti</option>
+                                                    <option value="Selesai">Selesai</option>
                                                 </select>
                                             @else
                                                 <!-- Jika status sudah Disetujui atau Ditolak, tetap tampilkan status dalam dropdown -->
-                                                <select name="status_surat" class="form-control" id="status_surat">
-                                                    <option value="Disetujui" {{ $surat->verifikasi->status_surat == 'Disetujui' ? 'selected' : '' }}>Disetujui</option>
-                                                    <option value="Ditolak" {{ $surat->verifikasi->status_surat == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                                <select name="status_disposisi" class="form-control" id="status_surat">
+                                                    <option value="Ditindaklanjuti" {{ $disposisiTerbaru->status_disposisi == 'Ditindaklanjuti' ? 'selected' : '' }}>Disetujui</option>
+                                                    <option value="Selesai" {{ $disposisiTerbaru->status_disposisi == 'Selesai' ? 'selected' : '' }}>Ditolak</option>
                                                 </select>
                                             @endif
                                         </div>
-                                        <div class="form-group">
-                                            <label for="status_surat">Catatan Verifikasi</label>
-                                            <textarea class="form-control" name="catatan" id="text-area" rows="3">{{ $surat->verifikasi->catatan ?? '' }}</textarea>
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label for="nik_atasan_langsung">Atasan Langsung:</label>
-                                            <select name="nik_atasan_langsung" id="nik_atasan_langsung" class="form-control">
-                                                <option value="">-- Select Pegawai --</option>
-                                                @foreach ($pegawai as $p)
-                                                    <option value="{{ $p->nik }}"
-                                                    @if($atasanLangsung && $atasanLangsung->nik_verifikator == $p->nik)
-                                                            selected
-                                                        @endif
-                                                    >{{ $p->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-success waves-effect waves-light">Kirim</button>
-                                    </form>
+                                            <div class="form-group" id="nik_penerima_container">
+                                                <label for="nik_penerima">Pilih Pegawai:</label>
+                                                <select name="nik_penerima" id="nik_penerima" class="form-control" required>
+                                                    <option value="">-- Select Pegawai --</option>
+                                                    @foreach ($pegawai as $p)
+                                                        <option value="{{ $p->nik }}">{{ $p->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group" id="catatan_container">
+                                                <label for="catatan">Catatan Tindak Lanjut:</label>
+                                                <textarea name="catatan" id="catatan" class="form-control" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-success waves-effect waves-light">Kirim Tindak Lanjut</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 <!-- Pesan fallback jika PDF tidak dapat dimuat -->
                                 <p>Your browser does not support PDFs. Please download the PDF to view it: <a href="{{ $pdfUrl }}">Download PDF</a>.</p>
                             </object> 
-                        
+                           
                             </div>
                             <div class="tab-pane" id="lampiran" role="tabpanel">
                             @if(!empty($surat->file_lampiran))
@@ -176,8 +176,8 @@
             </div>
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const element = document.getElementById('nik_atasan_langsung');
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('nik_penerima');
             const choices = new Choices(element, {
                 placeholderValue: 'Search Pegawai...',
                 searchEnabled: true,
@@ -186,5 +186,27 @@
             });
 
         });
+        document.addEventListener('DOMContentLoaded', function () {
+        const statusSelect = document.getElementById('status_surat');
+        const nikPenerimaContainer = document.getElementById('nik_penerima_container');
+        const catatanContainer = document.getElementById('catatan_container');
+
+        // Fungsi untuk mengatur visibilitas elemen berdasarkan status
+        function toggleFields() {
+            if (statusSelect.value === 'Selesai') {
+                nikPenerimaContainer.style.display = 'none'; // Sembunyikan nik_penerima
+                catatanContainer.style.display = 'none'; // Sembunyikan catatan
+            } else {
+                nikPenerimaContainer.style.display = 'block'; // Tampilkan nik_penerima
+                catatanContainer.style.display = 'block'; // Tampilkan catatan
+            }
+        }
+
+        // Jalankan fungsi saat halaman dimuat
+        toggleFields();
+
+        // Tambahkan event listener untuk perubahan dropdown
+        statusSelect.addEventListener('change', toggleFields);
+    });
         </script>
 @endsection
