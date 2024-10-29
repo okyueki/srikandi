@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="kode_barang" class="form-label" >Kode Barang</label>
-    <select name="kode_barang" id="kode_barang" class="js-example-basic-single form-controll" required>
+    <select name="kode_barang" id="kode_barang" class="form-control" required>
         @foreach($barang as $item)
             <option value="{{ $item->kode_barang }}" {{ old('kode_barang', $inventaris->kode_barang ?? '') == $item->kode_barang ? 'selected' : '' }}>
                 {{ $item->nama_barang }}
@@ -58,7 +58,7 @@
 
 <div class="form-group">
     <label for="id_ruang" class="form-label">Nama Ruang</label>
-    <select name="id_ruang" id="id_ruang" class="js-example-basic-single form-control" required>
+    <select name="id_ruang" id="id_ruang" class="form-control" required>
         @foreach($ruang as $r)
             <option value="{{ $r->id_ruang }}" {{ old('id_ruang', $inventaris->id_ruang ?? '') == $r->id_ruang ? 'selected' : '' }}>
                 {{ $r->nama_ruang }}
@@ -66,7 +66,6 @@
         @endforeach
     </select>
 </div>
-
 
 <div class="form-group">
     <label for="no_rak">No Rak</label>

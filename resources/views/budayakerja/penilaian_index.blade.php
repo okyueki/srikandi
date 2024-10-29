@@ -7,7 +7,7 @@
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-body">
-
+        
                 <div class="card-header">
                     <h3 class="card-title">Daftar Penilaian Harian</h3>
                 </div>
@@ -32,6 +32,7 @@
                             <button type="submit" class="btn btn-primary">Rekapitulasi Bulanan</button>
                         </form>
                         <a href="{{ route('penilaian.create') }}" class="btn btn-primary">Tambah Penilaian</a>
+                        
                     </div>
                 </div>
 

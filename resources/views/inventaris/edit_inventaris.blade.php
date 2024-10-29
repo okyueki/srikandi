@@ -18,4 +18,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inisialisasi Choices.js untuk dropdown
+        const kodeProdusen = new Choices('#kode_produsen', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idMerk = new Choices('#id_merk', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idKategori = new Choices('#id_kategori', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+
+        const idJenis = new Choices('#id_jenis', {
+            searchEnabled: true,
+            shouldSort: false,
+        });
+    });
+</script>
 @endsection

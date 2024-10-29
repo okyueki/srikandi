@@ -3,9 +3,9 @@
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Temporary Presensi')
 
 @section('content')
-<div class="col-12">
-    <div class="card">
-        <div class="card-header">
+<div class="col-xl-12">
+    <div class="card custom-card">
+        <div class="card-body">
             <h3 class="card-title">Temporary Presensi</h3>
         </div>
         <div class="card-body">

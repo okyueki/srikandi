@@ -18,6 +18,7 @@ use App\Http\Controllers\Kepegawaian\AbsensiController;
 use App\Http\Controllers\Kepegawaian\BirthdayController;
 use App\Http\Controllers\Kepegawaian\PenilaianController;
 use App\Http\Controllers\Kepegawaian\ItemPenilaianController;
+use App\Http\Controllers\Kepegawaian\JadwalController;
 use App\Http\Controllers\Inventaris\InventarisBarangController;
 use App\Http\Controllers\Inventaris\InventarisController;
 use App\Http\Controllers\Inventaris\PermintaanPerbaikanInventarisController;
@@ -27,6 +28,13 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\TemplateSuratController;
+use App\Http\Controllers\Helpdesk\HelpdeskController;
+use App\Http\Controllers\Helpdesk\ResponKerjaController;
+use App\Http\Controllers\Helpdesk\KomentarController;
+use App\Http\Controllers\Helpdesk\TicketTeknisiController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\Tiket\ResponTiketController;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -122,6 +130,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');
 Route::resource('surat_keluar', SuratKeluarController::class)->middleware('auth');
+
 Route::get('/surat_keluar/detail/{encryptedKodeSurat}', [SuratKeluarController::class, 'detail'])->name('surat_keluar.detail')->middleware('auth');
 Route::get('/surat_keluar/kirimsurat/{encryptedKodeSurat}', [SuratKeluarController::class, 'kirimsurat'])->name('surat_keluar.kirimsurat')->middleware('auth');
 Route::post('/surat_keluar/kirimsuratproses', [SuratKeluarController::class, 'kirimSuratProses'])->name('surat_keluar.kirimSuratProses')->middleware('auth');
@@ -138,3 +147,29 @@ Route::post('/surat_masuk/tindaklanjut/proses/{id_surat}', [SuratMasukController
 Route::get('/surat/show/{encryptedKodeSurat}', [SuratController::class, 'show'])->name('surat.show');
 
 Route::resource('template_surat', TemplateSuratController::class);
+
+Route::get('/surat_keluar/show/{encryptedKodeSurat}', [SuratKeluarController::class, 'show'])->name('surat_keluar.show');
+
+Route::resource('surat_masuk', SuratMasukController::class)->middleware('auth');
+Route::get('/surat_masuk/verifikasi/{encryptedKodeSurat}', [SuratMasukController::class, 'verifikasi'])->name('surat_masuk.verifikasi');
+
+Route::resource('tickets', TicketController::class);
+Route::put('/ticket/{id}/status', [ResponKerjaController::class, 'updateStatus'])->name('ticket.updateStatus');
+
+Route::get('/get-no-hp', [TicketController::class, 'getNoHp'])->name('get.nohp');
+
+Route::get('/helpdesk/dashboard', [HelpdeskController::class, 'index'])->name('helpdesk.dashboard');
+Route::get('/helpdesk/ticket/{id}', [HelpdeskController::class, 'show'])->name('helpdesk.ticket.show');
+Route::get('/helpdesk/ticket/{id}/respon/create', [ResponKerjaController::class, 'create'])->name('responKerja.create');
+Route::post('/helpdesk/ticket/{id}/respon', [ResponKerjaController::class, 'store'])->name('responKerja.store');
+Route::put('/helpdesk/ticket/respon/{id}', [ResponKerjaController::class, 'update'])->name('responKerja.update');
+Route::post('/helpdesk/ticket/{ticket}/komentar', [KomentarController::class, 'store'])->name('komentar.store');
+Route::post('/helpdesk/ticket/{ticket}/teknisi', [TicketTeknisiController::class, 'store'])->name('teknisi.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    Route::get('jadwal/{id}/edit/{bulan}/{tahun}', [JadwalController::class, 'edit'])->name('jadwal.edit');
+    Route::put('jadwal/{id}/update/{bulan}/{tahun}', [JadwalController::class, 'update'])->name('jadwal.update');
+});
+
+
