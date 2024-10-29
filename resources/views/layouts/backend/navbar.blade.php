@@ -199,6 +199,9 @@
                                 <li class="slide">
                                     <a href="{{ route('struktur_organisasi.index'); }}" class="side-menu__item">Struktur Organisasi</a>
                                 </li>
+                                <li class="slide">
+                                    <a href="{{ route('template_surat.index'); }}" class="side-menu__item">Template Surat</a>
+                                </li>
                                 
                                 <li class="slide">
                                     <a href="object-fit.html" class="side-menu__item">Kosong</a>

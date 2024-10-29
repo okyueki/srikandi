@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+         $schedule->command('storage:temp_surat:clear')->hourly();
     }
 
     /**
@@ -23,6 +24,10 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
+    protected $commands = [
+        \App\Console\Commands\ClearTempSurat::class,
+    ];
+    
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

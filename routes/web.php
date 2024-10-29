@@ -25,6 +25,8 @@ use App\Http\Controllers\Inventaris\PerbaikanInventarisController;
 use App\Http\Controllers\FullCalendarController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\SuratMasukController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\TemplateSuratController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -120,8 +122,19 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/rekapitulasi-bulanan', [PenilaianController::class, 'rekapitulasiBulanan'])->name('rekapitulasi.bulanan');
 Route::resource('surat_keluar', SuratKeluarController::class)->middleware('auth');
-Route::get('/surat_keluar/show/{encryptedKodeSurat}', [SuratKeluarController::class, 'show'])->name('surat_keluar.show');
+Route::get('/surat_keluar/detail/{encryptedKodeSurat}', [SuratKeluarController::class, 'detail'])->name('surat_keluar.detail')->middleware('auth');
+Route::get('/surat_keluar/kirimsurat/{encryptedKodeSurat}', [SuratKeluarController::class, 'kirimsurat'])->name('surat_keluar.kirimsurat')->middleware('auth');
+Route::post('/surat_keluar/kirimsuratproses', [SuratKeluarController::class, 'kirimSuratProses'])->name('surat_keluar.kirimSuratProses')->middleware('auth');
 
-Route::resource('surat_masuk', SuratMasukController::class)->middleware('auth');
-Route::get('/surat_masuk/verifikasi/{encryptedKodeSurat}', [SuratMasukController::class, 'verifikasi'])->name('surat_masuk.verifikasi');
+Route::resource('surat_masuk', SuratMasukController::class)->middleware('auth')->middleware('auth');
+Route::get('/surat_masuk/verifikasi/{encryptedKodeSurat}', [SuratMasukController::class, 'verifikasi'])->name('surat_masuk.verifikasi')->middleware('auth');
+Route::put('/surat_masuk/verifikasiproses/{id}', [SuratMasukController::class, 'verifikasiProses'])->name('surat_masuk.verifikasiProses')->middleware('auth');
+Route::get('/surat_masuk/detail/{encryptedKodeSurat}', [SuratMasukController::class, 'detail'])->name('surat_masuk.detail')->middleware('auth');
+Route::get('/surat_masuk/disposisi/{encryptedKodeSurat}', [SuratMasukController::class, 'disposisi'])->name('surat_masuk.disposisi')->middleware('auth');;
+Route::put('/surat_masuk/verifikasidisposisiproses/{id}', [SuratMasukController::class, 'verifikasiDisposisiProses'])->name('surat_masuk.verifikasiDisposisiProses')->middleware('auth');
+Route::get('/surasurat_masuk/tindaklanjut/{encryptedKodeSurat}', [SuratMasukController::class, 'tindaklanjut'])->name('surat_masuk.tindaklanjut')->middleware('auth');
+Route::post('/surat_masuk/tindaklanjut/proses/{id_surat}', [SuratMasukController::class, 'tindaklanjutProses'])->name('surat_masuk.tindaklanjutProses')->middleware('auth');
 
+Route::get('/surat/show/{encryptedKodeSurat}', [SuratController::class, 'show'])->name('surat.show');
+
+Route::resource('template_surat', TemplateSuratController::class);

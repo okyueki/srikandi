@@ -48,8 +48,12 @@
                             <div class="form-group mb-3">
                                 <label for="level">Level:</label>
                                 <select name="level" class="form-control">
-                                    <option value="Admin" {{ $user->level == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="User" {{ $user->level == 'User' ? 'selected' : '' }}>User</option>
+                                    <option value="Direktur" {{ $user->level == 'Direktur' ? 'selected' : '' }}>Direktur</option>
+                                    <option value="Kabag" {{ $user->level == 'Kabag' ? 'selected' : '' }}>Kabag</option>
+                                    <option value="Kabid" {{ $user->level == 'Kabag' ? 'selected' : '' }}>Kabid</option>
+                                    <option value="Kasie" {{ $user->level == 'Kasie' ? 'selected' : '' }}>Kasie</option>
+                                    <option value="Koordinator" {{ $user->level == 'Koordinator' ? 'selected' : '' }}>Koordinator</option>
+                                    <option value="Pelaksana" {{ $user->level == 'Pelaksana' ? 'selected' : '' }}>Pelaksana</option>
                                 </select>
                             </div>
 

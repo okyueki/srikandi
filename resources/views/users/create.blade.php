@@ -45,8 +45,12 @@
                             <div class="form-group mb-3">
                                 <label for="level">Level:</label>
                                 <select name="level" class="form-control">
-                                    <option value="Admin">Admin</option>
-                                    <option value="User">User</option>
+                                <option value="Direktur">Direktur</option>
+                                    <option value="Kabag">Kabag</option>
+                                    <option value="Kabid">Kabid</option>
+                                    <option value="Kasie">Kasie</option>
+                                    <option value="Koordinator">Koordinator</option>
+                                    <option value="Pelaksana">Pelaksana</option>
                                 </select>
                             </div>
 

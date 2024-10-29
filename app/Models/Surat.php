@@ -17,9 +17,11 @@ class Surat extends Model
         'id_klasifikasi_surat',
         'id_sifat_surat',
         'nik_pengirim',
+        'pengirim_external',
         'perihal',
         'tanggal_surat',
         'lampiran',
+        'tanggal_surat_diterima',
         'file_surat',
         'file_lampiran',
     ];
@@ -27,6 +29,10 @@ class Surat extends Model
     public function verifikasi()
     {
         return $this->hasOne(VerifikasiSurat::class, 'id_surat');
+    }
+    public function disposisi()
+    {
+        return $this->hasOne(DisposisiSurat::class, 'id_surat');
     }
     public function klasifikasi_surat()
     {
