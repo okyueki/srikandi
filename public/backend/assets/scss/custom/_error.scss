@@ -1,0 +1,34 @@
+/* Start:: error */
+@media (min-width: 768px) {
+    .error-page-img {
+        height: 30%;
+        width: 30%;
+    }
+}
+
+.main-error-wrapper {
+    .title {
+        font-weight: 500;
+        letter-spacing: -0.5px;
+        margin-block-end: 15px;
+        font-size: 1.75rem;
+    }
+    .sub_title {
+        margin-block-end: 40px;
+        font-size: 14px;
+        color: $primary;
+    }
+    h1 {
+        line-height: 1;
+        font-size: 150px;
+        font-weight: 700;
+    }
+}
+.error-bg {
+    background-color: $primary-05;
+}
+
+.main-error-wrapper.wrapper-1 {
+    min-height: 100vh;
+}
+/* End:: error */

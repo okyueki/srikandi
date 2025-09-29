@@ -1,0 +1,88 @@
+/* Start:: breadcrumb */
+
+.page-header-breadcrumb {
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "\ea65");
+    font-family: "tabler-icons" !important;
+  }
+  .breadcrumb {
+    background: transparent !important;
+    padding: 0;
+    margin-block-end: 0;
+    font-size: 12px;
+  }
+}
+[dir="rtl"] {
+  .page-header-breadcrumb {
+    .breadcrumb-item+.breadcrumb-item::before {
+      content: var(--bs-breadcrumb-divider, "\ea64");
+      font-family: "tabler-icons" !important;
+    }
+  }
+  .breadcrumb-example1 .breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "\ea64");
+  }
+  .breadcrumb-style2 .breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "\ea60");
+  }
+  .breadcrumb-style1 .breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, "\ea1b");
+}
+  .breadcrumb-withsvg {
+    .breadcrumb-item+.breadcrumb-item::before {
+      transform: scaleX(-1);
+      padding-inline-end: 0 !important;
+      padding-inline-start: 0.5rem !important;
+    }
+  }
+}
+.breadcrumb {
+  .breadcrumb-item {
+    a {
+      color: $primary;
+    }
+
+    &.active {
+      color: $gray-6;
+    }
+  }
+}
+.breadcrumb-item+.breadcrumb-item::before {
+  color: $text-muted;
+  opacity: 0.7;
+}
+.breadcrumb-example1 {
+  .breadcrumb-item+.breadcrumb-item::before {
+    color: $text-muted;
+    content: var(--bs-breadcrumb-divider, "\ea65");
+    font-family: "tabler-icons" !important;
+  }
+}
+.breadcrumb-style1 {
+  .breadcrumb-item+.breadcrumb-item::before {
+    color: $text-muted;
+    content: var(--bs-breadcrumb-divider, "\ea1c");
+    font-family: "tabler-icons" !important;
+  }
+}
+.breadcrumb-style2 {
+  .breadcrumb-item+.breadcrumb-item::before {
+    color: $text-muted;
+    content: var(--bs-breadcrumb-divider, "\ea61");
+    font-family: "tabler-icons" !important;
+  }
+}
+.embedded-breadcrumb:before {
+  opacity: 0.7;
+}
+[data-theme-mode="dark"] {
+  .embedded-breadcrumb:before {
+    filter: invert(1);
+  }
+}
+@media (max-width: 767px) {
+  .right-content {
+    margin-block-start: 20px !important;
+  }
+}
+/* End:: breadcrumb */

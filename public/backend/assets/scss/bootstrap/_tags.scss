@@ -1,0 +1,86 @@
+/* Start:: tags */
+.tag {
+    font-size: 0.75rem;
+    background-color: $custom-bg-color;
+    border-radius: 3px;
+    padding: 0 0.5rem;
+    line-height: 2em;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    cursor: default;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    >.tag:not(:last-child) {
+        margin-inline-end: 0.5rem;
+    }
+
+    >.tag {
+        margin-block-end: 0.5rem;
+    }
+}
+.tag-addon {
+    display: inline-block;
+    padding: 0 0.5rem;
+    color: inherit;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.06);
+    margin: 0 -0.5rem 0 0.5rem;
+    margin-block: 0;
+    margin-inline-start: 0.5rem;
+    margin-inline-end: -0.5rem;
+    text-align: center;
+    min-width: 1.5rem;
+}
+a.tag-addon {
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s color, 0.3s background;
+    &:last-child {
+        border-start-end-radius: 3px;
+        border-end-end-radius: 3px;
+    }
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: $white;
+    }
+}
+.tag-rounded {
+    border-radius: 50px;
+}
+.tag-primary {
+    background-color: $primary !important;
+    color: $white;
+}
+.tag-secondary {
+    background-color: $secondary !important;
+    color: $white;
+}
+.tag-danger {
+    background-color: $danger !important;
+    color: $white;
+}
+.tag-success {
+    background-color: $success !important;
+    color: $white;
+}
+.tag-info {
+    background-color: $info !important;
+    color: $white;
+}
+.tag-warning {
+    background-color: $warning !important;
+    color: $white;
+}
+.tag-teal {
+    background-color: $teal !important;
+    color: $white;
+}
+
+.tags>.tag {
+    margin-block-end: 0.5rem;
+}
+/* End:: tags */

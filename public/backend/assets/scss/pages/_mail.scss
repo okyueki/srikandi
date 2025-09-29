@@ -1,0 +1,363 @@
+/* Start:: mail */
+.main-nav-column {
+    .nav-link {
+        span {
+            font-weight: 400;
+            font-size: 11px;
+            color: $text-muted;
+            margin-inline-start: auto;
+        }
+        &.active i {
+            color: $primary !important;
+        }
+    }
+}
+.main-mail-menu {
+    .main-nav-column {
+        .nav-link {
+            &.active i {
+                color: $primary;
+            }
+        }
+    }
+}
+.main-nav-column .nav-link:hover {
+    color: $card-title-color;
+    i:not([class*=" tx-"]) {
+        color: $card-title-color;
+    }
+}
+.main-nav-column .nav-link i:not([class*=" tx-"]) {
+    color: $gray-6;
+}
+
+.main-content-label.main-content-label-sm {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $gray-5;
+    letter-spacing: 0.5px;
+}
+@media (min-width: 992px) {
+    .main-mail-header {
+        padding: 0 0 0 25px;
+        margin-block-end: 25px;
+    }
+}
+.main-mail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 20px;
+    padding: 0 20px;
+}
+@media (min-width: 768px) {
+    .main-content-body-mail .main-mail-header>div:last-child {
+        display: flex;
+        align-items: center;
+    }
+}
+.main-mail-header>div:last-child {
+    display: none;
+}
+.main-mail-header>div:last-child>span {
+    font-size: 12px;
+    margin-inline-end: 10px;
+}
+.main-mail-header .btn-group .btn.disabled, 
+.main-mail-header .btn-group .sp-container button.disabled {
+    color: $default-border;
+    border-color: $default-border;
+    z-index: 0;
+}
+.main-mail-header .btn-group .btn, 
+.main-mail-header .btn-group .sp-container button {
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    line-height: 0;
+    padding: 0;
+    position: relative;
+    border-color: $default-border;
+}
+.main-mail-options {
+    padding: 5px 10px 5px 20px;
+    border: 1px solid $default-border;
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+}
+.ckbox {
+    font-weight: normal;
+    position: relative;
+    line-height: 1;
+    margin-block-end: 0;
+    span:before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        background-color: $custom-white;
+        border: 1px solid $default-border;
+        inset-block-start: 1px;
+        inset-inline-start: 0;
+        border-radius: 0.25rem;
+    }
+    span:before, span:after {
+        line-height: 18px;
+        position: absolute;
+    }
+    span:after {
+        inset-block-start: 1px;
+        inset-inline-start: 0;
+        width: 16px;
+        height: 16px;
+        content: '';
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+        background-size: 55%;
+        background-repeat: no-repeat;
+        background-position: 55% 50%;
+        background-color: $primary;
+        line-height: 17px;
+        display: none;
+        border-radius: 0.25rem;
+      }
+}
+.ckbox input[type=checkbox] {
+    opacity: 0;
+    margin: 0;
+}
+.main-mail-options {
+    .btn, 
+    .sp-container button {
+        font-size: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        background-color: transparent;
+        border-width: 0;
+    }
+    .btn.disabled, .sp-container button.disabled {
+        background-color: transparent;
+        color: $gray-7;
+    }
+}
+.main-mail-list {
+    border: 1px solid $default-border;
+}
+.main-mail-list {
+    overflow: hidden;
+}
+.main-mail-list .main-mail-body {
+    width: calc(100% - 80px);
+    cursor: pointer;
+}
+@media (min-width: 1200px) {
+    .main-mail-list .main-mail-body {
+        max-width: 640px;
+    }
+
+}
+.main-mail-attachment {
+    margin-inline-end: 15px;
+    font-size: 21px;
+    line-height: 0.9;
+    display: none;
+}
+.main-mail-date {
+    font-size: 11px;
+    position: absolute;
+    inset-block-start: 12px;
+    inset-inline-end: 15px;
+    color: $gray-5;
+    margin-inline-start: auto;
+}
+@media (min-width: 992px) {
+    .main-mail-list {
+        border-top-width: 0;
+    }
+    .main-mail-list {
+        .main-mail-attachment {
+            display: block;
+            position: absolute;
+            inset-inline-end: 63px;
+            inset-block-start: 8px;
+        }
+        .main-mail-item {
+            width: auto;
+            padding: 10px 25px;
+        }
+        .main-mail-date {
+            position: absolute;
+            font-size: 13px;
+            inset-block-start: 8px;
+        }
+    }
+    .main-mail-list .main-mail-body {
+        max-width: 460px;
+        margin-inline-end: 15px;
+        flex: 1;
+    }
+    .main-mail-item .main-mail-checkbox {
+        display: block;
+    }
+    .main-mail-list .main-mail-star {
+        position: relative;
+        bottom: auto;
+        inset-block-start: 2px;
+    }
+    .main-mail-options {
+        padding-inline-start: 25px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+.main-mail-item.unread {
+    background-color: $custom-white;
+}
+.main-mail-item:hover, .main-mail-item:focus {
+    background-color: $custom-bg-color;
+}
+.main-mail-item:first-child {
+    border-top-width: 0;
+}
+@media (min-width: 576px) {
+    .main-mail-item {
+        padding: 10px 20px;
+    }
+}
+.main-mail-checkbox {
+    margin-inline-end: 15px;
+    display: none;
+}
+.main-mail-star {
+    margin-inline-end: 15px;
+    font-size: 18px;
+    line-height: 0.9;
+    color: $default-border;
+    position: absolute;
+    bottom: 10px;
+    inset-inline-end: 0;
+}
+.main-mail-item {
+    .main-img-user, .main-avatar {
+        flex-shrink: 0;
+        margin-inline-end: 15px;
+    }
+}
+.main-img-user {
+    display: inline-block;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    text-align: center;
+}
+.main-img-user {
+    img {
+    object-fit: cover;
+    border-radius: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    }
+}
+.main-mail-item {
+    padding: 10px 15px;
+    border-block-end: 1px solid $default-border;
+    background-color: $light;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.main-avatar {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: $gray-7;
+}
+.main-mail-item .main-avatar {
+    flex-shrink: 0;
+    margin-inline-end: 15px;
+}
+.main-mail-star.active {
+    color: $warning;
+}
+.ckbox input[type=checkbox]:checked+span:after {
+    display: block;
+}
+
+.main-mail-header>div:first-child p {
+    font-size: 13px;
+    margin-block-end: 0;
+}
+
+.main-content-title {
+    color: $card-title-color;
+    font-weight: 500;
+    font-size: 32px;
+    text-indent: -1px;
+    line-height: 1;
+    position: relative;
+    margin-block-end: 20px;
+}
+
+.main-mail-from {
+    font-size: 13px;
+}
+.main-mail-subject strong {
+    font-weight: 700;
+    font-size: 14px;
+    color: $card-title-color;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
+@media (min-width: 576px) {
+    .main-mail-subject {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        strong {
+            display: inline;
+            width: auto;
+            white-space: normal;
+            text-overflow: inherit;
+            overflow: visible;
+        }
+    }
+}
+.main-chat-list .media.selected {
+    background-color: $custom-bg-color;
+    border-inline-start: 1px solid $primary;
+    z-index: 2;
+}
+.main-chat-list .media:hover, .main-chat-list .media:focus {
+    background-color: $default-background;
+}
+[data-theme-mode="dark"] {
+    .main-nav-column {
+        .nav-link {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+    .main-mail-options .btn.disabled, .main-mail-options .sp-container button.disabled {
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+/* End:: mail */

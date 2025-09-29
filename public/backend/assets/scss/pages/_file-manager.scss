@@ -1,0 +1,72 @@
+/* Start:: file-manager */
+.main-content-left-mail {
+    .btn-compose {
+        margin-block-end: 20px;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 11px;
+        padding: 0 20px;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+    }
+}
+
+.main-nav-column {
+    flex-direction: column;
+}
+
+.main-nav-column {
+    .nav-link {
+        &.active {
+            position: relative;
+            color: $primary !important;
+        }
+        &.active, &:hover {
+            background-color: transparent;
+          }
+        padding: 0;
+        height: 38px;
+        color: $gray-7;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        i {
+            font-size: 24px;
+            line-height: 0;
+            width: 24px;
+            margin-inline-end: 12px;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+        }
+    }
+}
+@media (min-width: 992px) {
+    .main-mail-menu .nav-link {
+        font-size: 14px;
+    }
+}
+.main-mail-menu {
+    .nav-link {
+        height: 38px;
+        i {
+            font-size: 17px;
+        }
+    }
+}
+.file-manager-icon {
+    width: 30px;
+    height: 30px;
+}
+.file-manger-icon img {
+    width: 70px;
+    height: 70px;
+}
+[dir="rtl"]{
+    .file-details-card {
+        direction: rtl;
+    }
+}
+/* End:: file-manager */

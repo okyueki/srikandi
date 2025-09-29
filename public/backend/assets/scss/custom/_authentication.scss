@@ -1,0 +1,78 @@
+/* Start:: authentication */
+.main-signin-footer {
+    a {
+        font-weight: 700;
+    }
+    p {
+        color: $gray-7;
+    }
+}
+.custom-page {
+
+    .header-logo {
+        img {
+            height: 2rem;
+        }
+    }
+
+    .desktop-white {
+        display: none;
+    }
+}
+
+.main-signup-header h3 {
+    font-weight: 500;
+    color: $primary;
+    letter-spacing: -1px;
+}
+.login, .image {
+    min-height: 100vh;
+}
+
+@media (max-width: 767px) {
+    .main-signup-header, .main-card-signin {
+        padding: 0;
+        border: 1px solid $default-border;
+        border-radius: 6px;
+    }
+}
+
+.under-maintenance-time {
+    background-color: $primary;
+    width: 75px;
+    height: 72px;
+    color: $white;
+    line-height: 1.75;
+    border-radius: 3px;
+    vertical-align: middle!important;
+}
+
+.construction .btn.btn-icon {
+    border: 0;
+    text-align: center;
+    padding: 0;
+    border-radius: 3px;
+}
+.construction .btn.btn-icon .btn-inner--icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid $default-border;
+    font-size: 16px;
+}
+[data-theme-mode="dark"] {
+    .custom-page {
+        .header-logo {
+            .desktop-white {
+                display: block;
+            }
+            .desktop-logo {
+                display: none;
+            }
+        }
+    }
+}
+/* End:: authentication */

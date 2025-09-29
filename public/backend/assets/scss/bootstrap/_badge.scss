@@ -1,0 +1,112 @@
+/* Start:: badge */
+.badge {
+    padding: .39em .45em .25em;
+    font-size: 75%;
+    line-height: 1;
+    font-weight: 500;
+    border-radius: 0.1875rem;
+}
+.badge-sm {
+    font-weight: normal;
+    font-size: 0.625rem;
+}
+.btn {
+    &.btn-outline-primary {
+        .badge {
+            background-color: $primary;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+    &.btn-outline-secondary {
+        .badge {
+            background-color: $secondary;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+    &.btn-outline-warning {
+        .badge {
+            background-color: $warning;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+    &.btn-outline-info {
+        .badge {
+            background-color: $info;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+    &.btn-outline-success {
+        .badge {
+            background-color: $success;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+    &.btn-outline-danger {
+        .badge {
+            background-color: $danger;
+            color: $white;
+        }
+        &:hover,&:focus,&:active {
+            .badge {
+                background-color: $custom-white;
+                color: $default-text-color;
+            }   
+        }
+    }
+}
+.custom-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+.icon-badges {
+    position: relative;
+    .icon {
+        width: 2rem;
+        height: 2rem;
+        fill: $text-muted;
+        font-size: 2rem;
+    }
+    .badge {
+        position: absolute;
+        inset-inline-end: -0.5rem;
+    }
+}
+.text-badge {
+    position: relative;
+    .badge {
+        position: absolute;
+        inset-inline-end: -1rem;
+        inset-block-start: -1rem;
+    }
+}
+/* End:: badge */

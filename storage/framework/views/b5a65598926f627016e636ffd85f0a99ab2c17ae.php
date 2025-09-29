@@ -1,0 +1,139 @@
+<?php $__env->startSection('pageTitle', isset($pageTitle) ? $pageTitle . $title :  $title); ?>
+
+<?php $__env->startSection('content'); ?>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card custom-card">
+                    <div class="card-body">
+                    <?php if($errors->any()): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><?php echo e($error); ?></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="<?php echo e(route('ijin.store')); ?>" method="POST" enctype="multipart/form-data" id="form-ijin">
+                            <?php echo csrf_field(); ?>
+                            <input type="hidden" name="jumlah_hari" id="jumlah_hari" class="form-control" value="<?php echo e(old('jumlah_hari')); ?>">
+                            <input type="hidden" name="file_path" id="file_path"> 
+                            <div class="form-group mb-3">
+                                <label for="tanggal_awal">Tanggal: </label>
+                                <div class="row">
+                                    <div class="col-5 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" name="tanggal_awal" id="tanggal_awal" class="form-control flatpickr" value="<?php echo e(old('tanggal_awal')); ?>">
+                                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" name="tanggal_akhir" id="tanggal_akhir" class="form-control flatpickr" value="<?php echo e(old('tanggal_akhir')); ?>">
+                                            <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 mb-3">
+                                        <span id="jumlah_hari_badge" style="font-size: 24px;" class="badge bg-success"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="keterangan">Keterangan:</label>
+                                <input type="text" name="keterangan" id="keterangan" class="form-control" value="<?php echo e(old('keterangan')); ?>">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="myFile" class="form-label">Upload Foto Bukti:</label>
+                                <input class="form-control" type="file" id="myFile">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="nik_atasan_langsung">Atasan Langsung:</label>
+                                <select name="nik_atasan_langsung" id="nik_atasan_langsung" class="form-control">
+                                    <option value="">-- Select Pegawai --</option>
+                                    <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($p->nik); ?>"><?php echo e($p->nama); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- End Page-content -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('#myDropify').dropify({
+        messages: {
+            'default': 'Pilih file',
+            'replace': 'Ganti',
+            'remove': 'Hapus',
+            'error': 'Oops, something wrong appended.'
+        },
+        error: {
+            'fileSize': 'Ukuran file terlalu besar (maks: 2MB).',
+            'fileExtension': 'Jenis file tidak diizinkan (hanya jpeg, jpg, png, pdf).'
+        }
+    });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize flatpickr for both date fields
+            flatpickr('.flatpickr', {
+                dateFormat: "Y-m-d",
+                onChange: function(selectedDates, dateStr, instance) {
+                    calculateDays();
+                }
+            });
+
+            function calculateDays() {
+                // Get the values of the start and end dates
+                const startDate = document.getElementById('tanggal_awal').value;
+                const endDate = document.getElementById('tanggal_akhir').value;
+
+                // If both dates are set, calculate the difference in days
+                if (startDate && endDate) {
+                    const start = new Date(startDate);
+                    const end = new Date(endDate);
+
+                    if (end >= start) {
+                        // Calculate the difference in days
+                        const timeDiff = end.getTime() - start.getTime();
+                        const dayDiff = timeDiff / (1000 * 3600 * 24) + 1; // Add 1 to include the end day
+                        document.getElementById('jumlah_hari').value = dayDiff;
+                        document.getElementById('jumlah_hari_badge').innerHTML = dayDiff + " Hari";
+                    } else {
+                        // Show SweetAlert if end date is before start date
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tanggal Akhir Salah',
+                            text: 'Tanggal Akhir harus lebih besar dari Tanggal Awal!',
+                        });
+                        // Clear the end date and jumlah_hari
+                        document.getElementById('tanggal_akhir').value = '';
+                        document.getElementById('jumlah_hari').value = '';
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('nik_atasan_langsung');
+            const choices = new Choices(element, {
+                placeholderValue: 'Search Pegawai...',
+                searchEnabled: true,
+                position: 'auto', // Menampilkan dropdown di bawah elemen
+                shouldSort: false, // Menghindari pengurutan jika tidak diperlukan
+                allowHTML: true // Add this line to suppress the deprecation warning
+            });
+
+        });
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.pages-layouts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /www/wwwroot/srikandi.rsaisyiyahsitifatimah.com/srikandi/resources/views/ijin/create.blade.php ENDPATH**/ ?>

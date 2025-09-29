@@ -1,0 +1,339 @@
+/* Start:: cards */
+.card {
+    margin-block-end: 1.5rem;
+    box-shadow: $card-box-shadow;
+    color: $default-text-color;
+    .card-header {
+        background-color: $custom-white !important;
+        color: $card-title-color;
+    }
+    .card-footer {
+        background-color: $custom-white !important;
+        color: $default-text-color;
+    }
+}
+.card-title {
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.card-body {
+    padding: 1.25rem;
+    color: $default-text-color;
+}
+.card.custom-card {
+    width: 100%;
+    margin-block-end: 1.5rem;
+    .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-block-end: 0;
+        padding-block-start: 1rem;
+        background-color: transparent !important;
+        .card-title {
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-block-end: 0;
+            .subtitle {
+                margin-block-end: 0;
+                text-transform: initial;
+            }
+        }
+    }
+    .card-link {
+        font-size: 0.75rem;
+    }
+    .card-footer {
+        background-color: transparent!important;
+    }
+    .footer-card-icon {
+        width: 60px;
+        height: 60px;
+    }
+    &.overlay-card {
+        position: relative;
+        overflow: hidden;
+        color: rgba(255,255,255,0.9);
+        .card-header {
+            border-block-end: 1px solid rgba(255,255,255,0.1);
+        }
+        .card-footer {
+            border-block-start: 1px solid rgba(255,255,255,0.1);
+        }
+        .over-content-bottom {
+            top: auto;
+        }
+        &:before {
+            content: "";
+            inset-inline-start: 0;
+            inset-inline-end: 0;
+            inset-block-start: 0;
+            inset-block-end: 0;
+            background-color: rgba(0,0,0,0.2);
+            position: absolute;
+        }
+    }
+    /* Start::Card Background Colors */
+    &.card-bg-primary {
+            background-color: $primary;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-secondary {
+            background-color: $secondary;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-warning {
+            background-color: $warning;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-info {
+            background-color: $info;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-success {
+            background-color: $success;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-danger {
+            background-color: $danger;
+            color: $white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    &.card-bg-light {
+            background-color: $light;
+            color: $default-text-color;
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            color: $default-text-color;
+            border-block-end: $default-border;
+        }
+        .card-body {
+            color: $default-text-color;
+        }
+        .card-footer {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            color: $default-text-color;
+            border-block-start: $default-border;
+        }
+    }
+    &.card-bg-dark {
+            background-color: $dark;
+            color: $custom-white;
+        .card-header {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-end: 1px solid rgba(255,255,255,0.2);
+            &:before {
+                background-color: $custom-white;
+            }
+        }
+        .card-body {
+            color: $white;
+        }
+        .card-footer {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: $white;
+            border-block-start: 1px solid rgba(255,255,255,0.2);
+        }
+    }
+    /* End::Card Background Colors */
+
+    /* Start:: Cards With Links */
+    /* Start:: Cards With Links */
+    .card-anchor {
+        position: absolute;
+        top: 0;
+        inset-inline-end: 0;
+        bottom: 0;
+        inset-inline-start: 0;
+        z-index: 1;
+        pointer-events: auto;
+        content: "";
+    }
+    /* End:: Cards With Links */
+
+    /* Start:: Card With Collapse */
+    .collapse-close {
+        display: none;
+    }
+    &.collapse-card .card-header {
+        padding-block-end: 1rem;
+    }
+    &.card .collapsed {
+        .collapse-close {
+            display: block;
+        }
+        .collapse-open {
+            display: none;
+        }
+    }
+    /* End:: Card With Links */
+
+    /* Start::Card With FullScreen */
+    &.card-fullscreen {
+        position: fixed;
+        top: 0;
+        inset-inline-start: 0;
+        inset-inline-start: 0;
+        bottom: 0;
+        z-index: 9999;
+        margin: 0;
+        border-radius: 0;
+        border: 0;
+    }
+    /* End::Card With FullScreen */
+}
+
+/* Start:: card header*/
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-block-end: 0;
+    border-block-end: 0;
+}
+/* End:: card header*/
+
+/* Start:: card header*/
+.card-header {
+    position: relative;
+    border-color: $default-border;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+    padding-block-start: 1.25rem;
+}
+/* End:: card header*/
+
+/* Start:: card footer*/
+.card-footer {
+    position: relative;
+    border-color: $default-border;
+    padding: 1rem 1.25rem;
+}
+/* End:: card footer*/
+
+/* Start:: card header with dropdown*/
+.card-header .text-inverse i {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid $default-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+/* End:: card header with dropdown*/
+
+
+/* Start:: card group*/
+.card-group {
+    .card.custom-card {
+        box-shadow: none;
+    }
+}
+/* End:: card group*/
+
+/* Start:: card title*/
+
+.card-title {
+    color: $card-title-color;
+}
+
+/* End:: card title*/
+
+/* End:: cards */
